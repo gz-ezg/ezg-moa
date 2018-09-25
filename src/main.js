@@ -50,6 +50,19 @@ Vue.prototype.$backTo = function(){
   this.$router.go(-1)
 }
 
+Vue.prototype.$array2map = function (array){
+  if(array==""||array==null){
+      return ;
+  }else{
+      let tempMap = new Map()
+      for(let i = 0;i<array.length;i++){
+          tempMap.set(array[i].typecode,array[i].typename)
+      }
+      return tempMap
+  }
+
+}
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

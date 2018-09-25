@@ -9,7 +9,7 @@
         <van-row v-for="item in allFile" :key="item.id" style="margin:10px" >
           <div @click="add_item(item)">
             <van-col span="20">
-              <van-row style="margin-bottom:5px;font-size:18px" ><spa  n>{{item.file_type_name}}</spa></van-row>
+              <van-row style="margin-bottom:5px;font-size:18px" ><span>{{item.file_type_name}}</span></van-row>
               <van-row><span style="font-size:14px">{{item.companyname}}</span></van-row>
             </van-col>
             <van-col span="4">
