@@ -5,12 +5,8 @@
       <van-list v-for="(item, index) in unfinishFilesList" :key="index" >
         <div @click="confirm(item)">
           <van-row>
-            <!-- <van-col span="10" style="margin:5px">{{item.applicant_realname}}</van-col>
-            <van-col span="10" style="margin:5px">申请备注:{{item.application_memo}}</van-col>
-            <van-col span="24" style="padding-bottom:5px;border-bottom:1px solid black">申请时间:{{item.createdate}}</van-col> -->
-              <van-panel :title="item.applicant_realname" :desc="item.application_memo" :status="item.application_status">
-                <!-- <div slot="footer">{{item.createdate}}</div> -->
-              </van-panel>
+            <van-panel :title="item.applicant_name" :desc="item.application_memo" :status="item.createdate">
+            </van-panel>
           </van-row>
         </div>
       </van-list>
@@ -37,7 +33,9 @@ export default {
         params: {
           page: 1,
           pageSize: 1000,
-          sortField: "id"
+          application_status: "normal",
+          sortField: "id",
+          applicant_realname: _self.searchFile
         }
       }
 
@@ -53,9 +51,7 @@ export default {
       this.$router.push({
         name: "confirm",
         params: {
-          id: item.id,
-          receiver: item.receiver_realname,
-          applicant: item.applicant_realname
+          id: item.id
         }
       })
     }

@@ -11,7 +11,7 @@ import Exit from '@/components/hand_over/part/exit'
 import Login from  '@/components/login/login'
 import Confirm from  '@/components/hand_over/confirm/confirm'
 import Success from '@/components/common/field_success'
-
+import Detail from '@/components/hand_over/part/flow/detail'
 
 Vue.use(Router)
 
@@ -27,7 +27,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/confirm/:id/:receiver/:applicant',
+      path: '/confirm/:id',
       name: 'confirm',
       component: Confirm
     },
@@ -39,6 +39,11 @@ export default new Router({
       path: '/success',
       name: 'success',
       component: Success
+    },
+    {
+      path: '/detail/:id',
+      name: 'detail',
+      component: Detail
     },
     {
       path: '/handOver',

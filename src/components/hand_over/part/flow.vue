@@ -7,7 +7,7 @@
       <van-tab title="待确认">
         <un-finish-flow></un-finish-flow>
       </van-tab>
-      <van-tab title="已确认">
+      <van-tab title="全部">
         <finish-flow></finish-flow>
       </van-tab>
     </van-tabs>
