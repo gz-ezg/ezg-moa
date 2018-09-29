@@ -64,89 +64,6 @@ export default {
                 _self.$toast.fail("网络异常！")
             })
         },
-        //  打卡页面跳转
-        toIndex(){
-            let _self = this
-            let role_array = JSON.parse(localStorage.getItem("role"))
-            for(let i = 0;i<role_array.length;i++){
-                if(role_array[i] == "ssbgd" || role_array[i] == "servicer"){
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'commericalIndex'
-                        });
-                    }, 500)
-                    break;
-                }else if(role_array[i] == "salers"){
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'marketIndex'
-                        });
-                    }, 500)
-                    break;
-                }else if(role_array[i] == "kj" || role_array[i] == "kjbgd"){
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'accountIndex'
-                        });
-                    }, 500)
-                    break;
-                }else if(role_array[i] == "qhbgd" || role_array[i] == "planner"){
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'planIndex'
-                        });
-                    }, 500)
-                    break;
-                }else{
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'otherIndex'
-                        });
-                    }, 500)
-                }
-            }
-        },
-        toFinish(){
-            let _self = this
-            let role_array = JSON.parse(localStorage.getItem("role"))
-            for(let i = 0;i<role_array.length;i++){
-                if(role_array[i] == "ssbgd" || role_array[i] == "servicer"){
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'commericalLeave'
-                        });
-                    }, 500)
-                    break;
-                }else if(role_array[i] == "salers"){
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'marketLeave'
-                        });
-                    }, 500)
-                    break;
-                }else if(role_array[i] == "kj" || role_array[i] == "kjbgd"){
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'accountLeave'
-                        });
-                    }, 500)
-                    break;
-                }else if(role_array[i] == "qhbgd" || role_array[i] == "planner"){
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'planLeave'
-                        });
-                    }, 500)
-                    break;
-                }else{
-                    setTimeout(() => {
-                        _self.$router.push({
-                            name: 'otherLeave'
-                        });
-                    }, 500)
-                }
-            }
-        },
         // 获取当前用户角色
         getRole(e){
             let _self = this
@@ -158,82 +75,11 @@ export default {
                     }
                     let str = JSON.stringify(temp)
                     localStorage.setItem('role',str)
-                    _self.unfinshCheck()
                 }else{
                     _self.$toast.fail("系统错误！")
                 }
             }).catch(function(err){
                 _self.$toast.fail("网络异常！")
-            })
-        },
-        // 检测是否有未完成打开任务
-        unfinshCheck(){
-            let _self = this
-            this.$http.post('/api/legwork/apiCheckLoginUserlegworkPunchcardStatus').then(function(res){
-                if(res.data.msgCode == "40000"){
-                    if(res.data.data == "unfinished"){
-                        _self.getUnfinshWork()
-                        _self.$toast.fail("当前还有未结束的打卡！")
-                        _self.toFinish()
-                    }else if(res.data.data == "affirm"){
-                        _self.$toast.fail("还有未确认的协助外勤信息!")
-                        setTimeout(() => {
-                            _self.$router.push({
-                                name: 'accountComfirm'
-                            }
-                        );
-                    }, 500)
-                    }else{
-                        _self.$toast.success('登录成功！')
-                        _self.toIndex()
-                    }
-                }else{
-                    _self.$toast.fail("系统错误！")
-                }
-            }).catch(function(err){
-                _self.$toast.fail("网络异常！")
-            })
-
-        },
-        getAccountComfirm(){
-            let _self = this
-            this.$http.post('api/legwork/apiAccountAffirmLegworkMsg').then(function(res){
-                if(res.data.msgCode == "40000"){
-                    console.log(res)
-                }else{
-                    _self.$toast.fail("系统错误！")
-                }
-            }).catch(function(err){
-                _self.$toast.fail("网络异常！")
-                console.log(err)
-            })
-        },
-        //  获取未完成的打卡任务
-        getUnfinshWork(){
-            let _self = this
-            this.$http.post('/api/legwork/apiQueryUnfinishedPunchCard').then(function(res){
-                // console.log(res)
-                if(res.data.msgCode == "40000"){
-                    console.log(res)
-                    let temp = res.data.data.unfinishedPunchCard.date
-                    let time = temp.clocktime.replace(/\-/g, "/")
-                    let date = new Date(time)
-                    if(temp.companyname == null){
-                        temp.companyname = "空"
-                    }
-                    localStorage.setItem('companyname',temp.companyname)
-                    localStorage.setItem('field_id',temp.id)
-                    localStorage.setItem('product',temp.productname)
-                    localStorage.setItem('movingStatus',temp.assiststatus)
-                    localStorage.setItem('workorderid',temp.workorderid)
-                    let temp_time = date.getTime()
-                    localStorage.setItem('startTime',temp_time)
-                }else{
-                    _self.$toast.fail("系统错误！")
-                }
-            }).catch(function(err){
-                _self.$toast.fail("网络异常！")
-                console.log(err)
             })
         },
 
@@ -241,14 +87,17 @@ export default {
             let _self = this
             let url = `api/legwork/apiLoginByWechatCode`
             let formdata = new FormData()
-            formdata.append("agentId","1000022")
+            formdata.append("agentId","1000013")
             formdata.append("code",code)
 
             this.$http.post(url,formdata).then(function(res){
                 if(res.data.msgCode == 40000){
                     localStorage.setItem('realname', res.data.data.user.realname)
                     localStorage.setItem('id', res.data.data.user.id)
-                    _self.getRole(localStorage.getItem("id"))
+                    // _self.getRole(localStorage.getItem("id"))
+                    _self.$router.push({
+                       name: 'flow'
+                    })
                 }else{
                     _self.$toast.fail("免登陆失败！请登陆！")
                 }
@@ -263,8 +112,8 @@ export default {
             let temp = str.split("?")
             let temp2 = str.split("&")
             let params = temp2[0].split("=")
-            // console.log(params)
-            if(params[1] == "null"){
+            console.log(params)
+            if(params.length == "1"){
                 _self.$toast.fail("免登陆失效，请登录！")
             }else{
                 console.log(params[1])

@@ -1,7 +1,8 @@
 <template>
   <div>
     <van-row style="overflow-x: hidden">
-        <van-nav-bar title="交接管理" left-arrow @click-left="$backTo()" class="navBarStyle"/>
+        <van-nav-bar title="交接管理" class="navBarStyle"/>
+        <!-- @click-left="$backTo()" -->
         <router-view></router-view>
         <van-tabbar v-model="active" fixed>
           <van-tabbar-item icon="shop" to="entry">客户交接</van-tabbar-item>
@@ -11,18 +12,21 @@
     </van-row>
     <company-list></company-list>
     <file-type-list></file-type-list>
+    <q-code></q-code>
   </div>
 </template>
 
 <script>
 import companyList from './common/companyList'
 import fileTypeList from './common/fileList'
+import QCode from './part/flow/innerCode'
 
 export default {
   name: "index",
   components:{
     companyList,
-    fileTypeList
+    fileTypeList,
+    QCode
   },
   data(){
     return{

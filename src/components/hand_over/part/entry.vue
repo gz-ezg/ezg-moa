@@ -8,6 +8,9 @@
         <div @click="open_file_type">
           <van-field v-model="customerFileType" label="文件类型" placeholder="请选择文件类型" required/>
         </div>
+        <div v-if="isInputFilename">
+          <van-field v-model="customerFileName" label="文件名称" placeholder="请输入文件名称" required></van-field>
+        </div>
         <div v-if="plural">
           <van-field v-model="fileNum" label="文件数量" placeholder="请输入文件数量" />
         </div>
@@ -15,7 +18,7 @@
           <van-field v-model="saveDepart" label="存放部门" placeholder="请选择存放部门" required/>
         </div>
         <div @click="open_storage">
-          <van-field v-model="storage" label="存放地点" placeholder="请选择存放地点" />
+          <van-field v-model="storageName" label="存放地点" placeholder="请选择存放地点" />
         </div>
         <van-field v-model="storageCode" label="存放位置" placeholder="请选择存放位置" />
       </van-cell-group>
@@ -26,16 +29,28 @@
       </center>
     </van-row>
     <my-depart></my-depart>
+    <local-list></local-list>
   </div>
 </template>
 
 <script>
+import localList from '../common/localList'
 import myDepart from '../common/myDepart'
 
 export default {
   name:"entry",
   components:{
-    myDepart
+    myDepart,
+    localList
+  },
+  computed:{
+    isInputFilename(){
+      if(this.customerFileTypeId == "54"){
+        return true
+      }else{
+        return false
+      }
+    }
   },
   data(){
     return{
@@ -51,6 +66,7 @@ export default {
       storageName: "",
       storage: "",
       storageCode: "",
+      customerFileName: "",
       plural: true
     }
   },
@@ -65,46 +81,49 @@ export default {
       this.$bus.emit("OPEN_DEPART",true)
     },
     open_storage(){
-
+      this.$bus.emit("OPEN_LOCAL",true)
     },
     submit(){
       let _self = this
-      if(this.companyId && this.customerFileTypeId && this.saveDepartId){
-        let url = `api/customer/file/create`
-        this.loading = true
-        let config = {
-          customerFileTypeId: _self.customerFileTypeId,
-          saveDepartId: _self.saveDepartId,
-          storage: _self.storage,
-          companyId: _self.companyId,
-          fileNum: _self.fileNum,
-          storageCode: _self.storageCode,
+        if(this.companyId && this.customerFileTypeId && this.saveDepartId){
+          let url = `api/customer/file/create`
+          this.loading = true
+          let config = {
+            customerFileTypeId: _self.customerFileTypeId,
+            saveDepartId: _self.saveDepartId,
+            storage: _self.storage,
+            companyId: _self.companyId,
+            fileNum: _self.fileNum,
+            storageCode: _self.storageCode,
+            customerFileName: _self.customerFileName
+          }
+
+          function success(res){
+            _self.loading = false
+            _self.customerId = ""
+            _self.companyId = ""
+            _self.companyName = ""
+            _self.customerFileType = ""
+            _self.customerFileTypeId = ""
+            _self.fileNum = 1
+            _self.customerFileName = ""
+            _self.saveDepart = ""
+            _self.saveDepartId = ""
+            _self.storageName = ""
+            _self.storage = ""
+            _self.storageCode = ""
+            _self.plural = true
+          }
+
+          function fail(err){
+            _self.loading = false
+          }
+
+          this.$Post(url, config, success, fail)
+        }else{
+          this.$toast.fail("请补全信息！")
         }
 
-        function success(res){
-          _self.loading = false
-          _self.customerId = ""
-          _self.companyId = ""
-          _self.companyName = ""
-          _self.customerFileType = ""
-          _self.customerFileTypeId = ""
-          _self.fileNum = 1
-          _self.saveDepart = ""
-          _self.saveDepartId = ""
-          _self.storageName = ""
-          _self.storage = ""
-          _self.storageCode = ""
-          _self.plural = true
-        }
-
-        function fail(err){
-          _self.loading = false
-        }
-
-        this.$Post(url, config, success, fail)
-      }else{
-        this.$toast.fail("请补全信息！")
-      }
     }
   },
   created(){
@@ -133,6 +152,13 @@ export default {
       // console.log(e)
       _self.saveDepart = e.departname
       _self.saveDepartId = e.departid
+    })
+
+    this.$bus.off("UPDATE_LOCAL")
+    this.$bus.on("UPDATE_LOCAL", (e)=>{
+      _self.storageName = e.typename
+      _self.storage = e.typecode
+
     })
   }
 }

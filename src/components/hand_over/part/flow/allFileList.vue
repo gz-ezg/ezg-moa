@@ -9,7 +9,7 @@
         <van-row v-for="item in allFile" :key="item.id" style="margin:10px" >
           <div @click="add_item(item)">
             <van-col span="20">
-              <van-row style="margin-bottom:5px;font-size:18px" ><span>{{item.file_type_name}}</span></van-row>
+              <van-row style="margin-bottom:5px;font-size:18px" ><span>{{item.customer_file_name}}</span></van-row>
               <van-row><span style="font-size:14px">{{item.companyname}}</span></van-row>
             </van-col>
             <van-col span="4">
@@ -56,6 +56,7 @@ export default {
         params:{
           page: 1,
           pageSize: 1000,
+          file_status: "normal"
         }
       }
 
@@ -67,8 +68,8 @@ export default {
       this.$Get(url, config, success)
     },
     add_item(e){
-      this.$toast.success( e.file_type_name + "添加成功！")
-      e.num = 1
+      this.$toast.success( e.customer_file_name + "添加成功！")
+      e.num = e.max_allow_connect_num
       this.$emit("add_file",e)
     }
   }

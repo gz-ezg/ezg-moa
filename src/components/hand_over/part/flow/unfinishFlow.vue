@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom:12vh">
     <van-search placeholder="输入申请人筛选" v-model="searchFile" @search="get_data" />
     <van-row>
       <van-list v-for="(item, index) in unfinishFilesList" :key="index" >

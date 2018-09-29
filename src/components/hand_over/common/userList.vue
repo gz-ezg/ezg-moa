@@ -5,7 +5,7 @@
         :close-on-click-overlay="true"
         >
         <form action="/">
-            <van-search placeholder="请输入公司名称搜索" v-model="searchUserName" @click="search"/>
+            <van-search placeholder="请输入姓名搜索" v-model="searchUserName" @click="search"/>
         </form>
         <van-radio-group v-model="select_user_id">
             <van-cell-group>

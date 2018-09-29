@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom:12vh">
     <van-search placeholder="输入申请人筛选" v-model="searchFile" @search="get_data" />
     <van-row>
       <van-cell-group>
@@ -31,7 +31,7 @@ export default {
       let config = {
         params: {
           page: 1,
-          pageSize: 1000,
+          pageSize: 50,
           sortField: "id",
           applicant_realname: _self.searchFile
         }

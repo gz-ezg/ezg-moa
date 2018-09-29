@@ -23,7 +23,7 @@
               <center><van-icon name="close" style="font-size:20px;line-height:40px" @click="remove(index)"/></center>
             </van-col>
             <van-col span="16">
-              <van-row>{{item.file_type_name}}</van-row>
+              <van-row>{{item.customer_file_name}}</van-row>
               <van-row>{{item.companyname}}</van-row>
             </van-col>
             <van-col span="4"><van-field v-model="chooseList[index].num" type="number"/></van-col>
@@ -105,6 +105,8 @@ export default {
           _self.submit_loading = false
           _self.chooseList = []
           _self.connectPlan = "f_to_f"
+          _self.send_customer_msg(res.data.data.id)
+          _self.$bus.emit("OPEN_OUTER_QCODER", res.data.data.id)
         }
 
         function fail(err){
@@ -113,7 +115,25 @@ export default {
 
         this.$Post(url, config, success, fail)
       }
-    }
+    },
+    send_customer_msg(e){
+      console.log(e)
+      let url = `api/customer/file/connect/request/customer/send`
+      let _self  = this
+      let config = {
+        connectRequestId: e
+      }
+
+      function success(res){
+
+      }
+
+      function fail(err){
+
+      }
+
+      this.$Post(url, config, success, fail)
+    },
   },
   created(){
     let _self = this

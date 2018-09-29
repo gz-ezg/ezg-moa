@@ -17,7 +17,7 @@
       <van-cell-group>
         <van-cell
           v-for="item in fileData"
-          :title="item.file_type_name"
+          :title="item.customer_file_name"
           :value="item.connect_num"
           :label="item.companyname"
           :key="item.id"

@@ -1,5 +1,5 @@
 <template>
-  <div style="padding-bottom:10vh">
+  <div style="padding-bottom:12vh">
     <van-row>
       <van-cell-group>
         <div @click="open_user_select">
@@ -14,7 +14,7 @@
               <center><van-icon name="close" style="font-size:20px;line-height:40px" @click="remove(index)"/></center>
             </van-col>
             <van-col span="16">
-              <van-row>{{item.file_type_name}}</van-row>
+              <van-row>{{item.customer_file_name}}</van-row>
               <van-row>{{item.companyname}}</van-row>
             </van-col>
             <van-col span="4"><van-field v-model="chooseList[index].num" type="number"/></van-col>
@@ -99,6 +99,10 @@ export default {
 
       function success(res){
         _self.submit_loading = false
+        _self.$bus.emit("OPEN_INNER_QCODER", true)
+        _self.receiverId = ""
+        _self.receiverName = ""
+        _self.chooseList = []
       }
 
       function fail(err){

@@ -13,7 +13,7 @@
           <van-field v-model="formValidate.saveDepart" label="存放部门" placeholder="请选择存放部门" required/>
         </div>
         <div @click="open_storage" v-if="isShow">
-          <van-field v-model="formValidate.storage" label="存放地点" placeholder="请选择存放地点" required/>
+          <van-field v-model="formValidate.storagename" label="存放地点" placeholder="请选择存放地点" required/>
         </div>
         <van-field v-if="isShow" v-model="formValidate.storageCode" label="存放位置" placeholder="请选择存放位置" required/>
         <van-field v-model="formValidate.memo" placeholder="备注" type="textarea"/>
@@ -39,7 +39,7 @@
       <van-cell-group>
         <van-cell
           v-for="item in fileData"
-          :title="item.file_type_name"
+          :title="item.customer_file_name"
           :value="item.connect_num"
           :label="item.companyname"
           :key="item.id"
@@ -52,15 +52,18 @@
       </center>
     </van-row>
     <my-depart></my-depart>
+    <local></local>
   </div>
 </template>
 
 <script>
 import myDepart from '../common/myDepart'
+import local from '../common/localList'
 
 export default {
   components:{
-    myDepart
+    myDepart,
+    local
   },
   data(){
     return{
@@ -73,7 +76,8 @@ export default {
         saveDepartId: "",
         storage: "",
         storageCode: "",
-        memo: ""
+        memo: "",
+        storagename: ""
       },
       customer_f_s_a: [],
       customer_f_s_a_map: new Map(),
@@ -107,7 +111,7 @@ export default {
       this.$bus.emit("OPEN_DEPART",true)
     },
     open_storage(){
-
+      this.$bus.emit("OPEN_LOCAL",true)
     },
     get_request_detail(e){
       let _self = this
@@ -152,7 +156,7 @@ export default {
 
       _self.loading = true
       let config = {
-        status: "Y",
+        status: _self.formValidate.status,
         connectRequestId: _self.id,
         departId: _self.formValidate.saveDepartId,
         memo: _self.formValidate.memo,
@@ -162,7 +166,7 @@ export default {
 
       function success(res){
         _self.loading = false
-        this.$router.push({
+        _self.$router.push({
           name: "success"
         })
       }
@@ -183,6 +187,12 @@ export default {
     this.$bus.on("UPDATE_DEPART", (e)=>{
       _self.formValidate.saveDepart = e.departname
       _self.formValidate.saveDepartId = e.departid
+
+    })
+    this.$bus.off("UPDATE_LOCAL")
+    this.$bus.on("UPDATE_LOCAL", (e)=>{
+      _self.formValidate.storagename = e.typename
+      _self.formValidate.storage = e.typecode
 
     })
   }
