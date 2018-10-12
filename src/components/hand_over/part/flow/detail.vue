@@ -24,6 +24,7 @@
         />
       </van-cell-group>
     </van-list>
+    <center style="margin-top:20px"><van-button @click="deal" size="large" type="danger" style="width:90%" v-if="status == 'normal'" >我要处理</van-button></center>
   </div>
 </template>
 
@@ -48,7 +49,8 @@ export default {
       fileData: [],
       loading: false,
       application_memo: "",
-      createdate: ""
+      createdate: "",
+      status: ""
     }
   },
   computed:{
@@ -94,6 +96,7 @@ export default {
         _self.applicant = res.data.data.applicant_name
         _self.receiver = res.data.data.receiver_name
         _self.application_memo = res.data.data.application_memo
+        _self.status = res.data.data.application_status
         for(let i = 0; i < _self.fileData.length; i++){
           _self.fileData[i].storage = _self.customer_f_s_a_map.get(_self.fileData[i].storage)
         }
@@ -116,6 +119,15 @@ export default {
       }
       _self.$Get(url, config, success)
     },
+    deal(){
+      let _self = this
+      this.$router.push({
+        name: "confirm",
+        params: {
+          id: _self.id
+        }
+      })
+    }
   },
   created(){
     let _self = this

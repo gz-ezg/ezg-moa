@@ -8,7 +8,7 @@
         <div @click="open_file_type">
           <van-field v-model="customerFileType" label="文件类型" placeholder="请选择文件类型" required disabled/>
         </div>
-        <div>
+        <div v-if="isInputFilename">
           <van-field v-model="customerFileName" label="文件名称" placeholder="请输入文件名称" required></van-field>
         </div>
         <div v-if="plural">
@@ -25,25 +25,7 @@
     </van-row>
     <van-row>
       <center>
-        <van-button size="large" style="width:90%;margin-top:20px" type="default" @click="add_file_item" >新增资料项</van-button>
-      </center>
-    </van-row>
-    <van-row style="margin-top:10px">
-      <van-row v-for="(item, index) in dataJson" :key="index" style="margin-top:5px">
-        <van-col span="4">
-          <center><van-icon name="close" style="font-size:20px;line-height:20px" @click="remove(index)"/></center>
-        </van-col>
-        <van-col span="16">
-          <van-row>{{item.customerFileName}}</van-row>
-        </van-col>
-        <van-col span="4">
-          <van-row>{{item.fileNum}}</van-row>
-        </van-col>
-      </van-row>
-    </van-row>
-    <van-row>
-      <center>
-        <van-button size="large" style="width:90%;margin-top:20px" type="danger" @click="submit" :loading="loading" :disabled="disabledButton"> 新 增 </van-button>
+        <van-button size="large" style="width:90%;margin-top:20px" type="danger" @click="submit" :loading="loading"> 新 增 </van-button>
       </center>
     </van-row>
     <my-depart></my-depart>
@@ -62,18 +44,11 @@ export default {
     localList
   },
   computed:{
-    // isInputFilename(){
-    //   if(this.customerFileTypeId == "54"){
-    //     return true
-    //   }else{
-    //     return false
-    //   }
-    // }
-    disabledButton(){
-      if(this.companyId && this.dataJson.length != 0){
-        return false
-      }else{
+    isInputFilename(){
+      if(this.customerFileTypeId == "54"){
         return true
+      }else{
+        return false
       }
     }
   },
@@ -92,8 +67,7 @@ export default {
       storage: "",
       storageCode: "",
       customerFileName: "",
-      plural: true,
-      dataJson: []
+      plural: true
     }
   },
   methods:{
@@ -115,14 +89,13 @@ export default {
           let url = `api/customer/file/create`
           this.loading = true
           let config = {
-            // companyId: _self.customerFileTypeId,
-            dataJson: JSON.stringify(_self.dataJson),
-            // saveDepartId: _self.saveDepartId,
-            // storage: _self.storage,
+            customerFileTypeId: _self.customerFileTypeId,
+            saveDepartId: _self.saveDepartId,
+            storage: _self.storage,
             companyId: _self.companyId,
-            // fileNum: _self.fileNum,
-            // storageCode: _self.storageCode,
-            // customerFileName: _self.customerFileName
+            fileNum: _self.fileNum,
+            storageCode: _self.storageCode,
+            customerFileName: _self.customerFileName
           }
 
           function success(res){
@@ -140,7 +113,6 @@ export default {
             _self.storage = ""
             _self.storageCode = ""
             _self.plural = true
-            _self.dataJson = []
           }
 
           function fail(err){
@@ -152,28 +124,6 @@ export default {
           this.$toast.fail("请补全信息！")
         }
 
-    },
-    add_file_item(){
-      let _self = this
-
-      if(!_self.customerFileTypeId){
-        _self.$toast.fail("请输入文件类型")
-        return ;
-      }
-      let temp = {}
-      temp.customerFileName = _self.customerFileName
-      temp.customerFileTypeId = _self.customerFileTypeId
-      temp.saveDepartId = _self.saveDepartId
-      temp.storage = _self.storage
-      temp.fileNum = _self.fileNum
-      temp.storageCode = _self.storageCode
-
-      _self.dataJson.push(temp)
-
-      temp = null
-    },
-    remove(e){
-      this.dataJson.splice(e,1)
     }
   },
   created(){
@@ -188,15 +138,12 @@ export default {
     this.$bus.off("UPDATE_FILETYPE")
     this.$bus.on("UPDATE_FILETYPE", (e)=>{
       // console.log(e)
-      _self.customerFileName = e.file_type_name
       _self.customerFileType = e.file_type_name
       _self.customerFileTypeId = e.id
       if(e.plural == "Y"){
         _self.plural = true
-        _self.fileNum = "1"
       }else{
         _self.plural = false
-        _self.fileNum = "1"
       }
     })
 

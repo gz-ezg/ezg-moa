@@ -10,10 +10,10 @@
           <van-field v-model="applicant" placeholder="" label="申请人" disabled/>
         </div>
         <div @click="open_save_depart" v-if="isShow">
-          <van-field v-model="formValidate.saveDepart" label="存放部门" placeholder="请选择存放部门" required/>
+          <van-field v-model="formValidate.saveDepart" label="存放部门" placeholder="请选择存放部门" required disabled/>
         </div>
         <div @click="open_storage" v-if="isShow">
-          <van-field v-model="formValidate.storagename" label="存放地点" placeholder="请选择存放地点" required/>
+          <van-field v-model="formValidate.storagename" label="存放地点" placeholder="请选择存放地点" required disabled/>
         </div>
         <van-field v-if="isShow" v-model="formValidate.storageCode" label="存放位置" placeholder="请选择存放位置" required/>
         <van-field v-model="formValidate.memo" placeholder="备注" type="textarea"/>
