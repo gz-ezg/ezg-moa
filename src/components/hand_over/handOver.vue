@@ -1,5 +1,5 @@
 <template>
   <div>
-    简历首页
+    <router-view></router-view>
   </div>
 </template>

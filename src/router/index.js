@@ -8,7 +8,8 @@ import Login from  '@/components/login/login'
 import Index from '@/components/index/index.vue'
 
 //  交接工具
-const HandOver = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/index')
+const HandOver = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/handOver')
+const HandOverIndex = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/index')
 const Entry = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/part/entry')
 const Flow = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/part/flow')
 const Exit = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/part/exit')
@@ -18,9 +19,12 @@ const Success = () => import(/* webpackChunkName: "handover" */ '@/components/ha
 const Detail = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/part/flow/detail')
 
 //  简历库
-const Resume = () => import(/* webpackChunkName: "resume" */'@/components/resume/resume')
-const ResumeIndex = () => import(/* webpackChunkName: "resume" */'@/components/resume/index')
-const ResumeCreate = () => import(/* webpackChunkName: "resume" */'@/components/resume/create')
+const Resume = () => import(/* webpackChunkName: "resume" */ '@/components/resume/resume')
+const ResumeIndex = () => import(/* webpackChunkName: "resume" */ '@/components/resume/index')
+const ResumeCreate = () => import(/* webpackChunkName: "resume" */ '@/components/resume/create')
+
+//  移动市场
+const Market = () => import(/* webpackChunkName: "market" */ '@/components/market/market')
 
 Vue.use(Router)
 
@@ -46,42 +50,52 @@ export default new Router({
      * 交接工具路由start
      */
     {
-      path: '/confirm/:id',
-      name: 'confirm',
-      component: Confirm
-    },
-    {
-      path: '/success',
-      name: 'success',
-      component: Success
-    },
-    {
-      path: '/detail/:id',
-      name: 'detail',
-      component: Detail
-    },
-    {
       path: '/handOver',
       component: HandOver,
       children: [
         {
+          path: 'confirm/:id',
+          name: 'confirm',
+          component: Confirm
+        },
+        {
+          path: 'success',
+          name: 'success',
+          component: Success
+        },
+        {
+          path: 'detail/:id',
+          name: 'detail',
+          component: Detail
+        },
+        {
+          path: 'index',
+          component: HandOverIndex,
+          children: [
+            {
+              path: '/',
+              redirect: 'flow'
+            },
+            {
+              path: 'entry',
+              name: "entry",
+              component: Entry
+            },
+            {
+              path: 'flow',
+              name: "flow",
+              component: Flow
+            },
+            {
+              path: 'exit',
+              name: "exit",
+              component: Exit
+            },
+          ]
+        },
+        {
           path: '/',
           redirect: 'flow'
-        },
-        {
-          path: 'entry',
-          name: "entry",
-          component: Entry
-        },
-        {
-          path: 'flow',
-          name: "flow",
-          component: Flow
-        },
-        {
-          path: 'exit',
-          name: "exit",
-          component: Exit
         },
       ]
     },
@@ -110,6 +124,21 @@ export default new Router({
           redirect: "ResumeIndex"
         }
       ]
-    }
+    },
+    /**
+     * 移动市场路由start
+     */
+    // {
+    //   path: '/market',
+    //   component: Market,
+    //   children: [
+    //     {
+
+    //     }
+    //   ]
+    // }
+    /**
+     * 移动市场路由end
+     */
   ]
 })
