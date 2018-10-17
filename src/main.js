@@ -16,6 +16,9 @@ Vue.use(Lazyload);
 
 Vue.prototype.$http = axios
 
+// 打包安卓配置
+// axios.defaults.baseURL = 'http://cloud.zgcfo.com';
+
 Vue.prototype.$Get = function(url, config, success){
 	let _self = this
 	_self.$http.get(url, config).then(function(res){

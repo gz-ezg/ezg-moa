@@ -1,32 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+//  登录页
 import Login from  '@/components/login/login'
 
 //  九宫格
 import Index from '@/components/index/index.vue'
 
-//  交接资料
-// import HandOver from '@/components/hand_over/index'
-
-// import Entry from '@/components/hand_over/part/entry'
-// import Flow from '@/components/hand_over/part/flow'
-// import Exit from '@/components/hand_over/part/exit'
-
-// import Confirm from  '@/components/hand_over/confirm/confirm'
-// import Success from '@/components/hand_over/confirm/comfirm_success'
-// import Detail from '@/components/hand_over/part/flow/detail'
-
+//  交接工具
 const HandOver = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/index')
-
 const Entry = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/part/entry')
 const Flow = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/part/flow')
 const Exit = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/part/exit')
 
-const Confirm = () => import(/* webpackChunkName: "handover_cofirm" */ '@/components/hand_over/confirm/confirm')
-const Success = () => import(/* webpackChunkName: "handover_cofirm" */ '@/components/hand_over/confirm/comfirm_success')
-const Detail = () => import(/* webpackChunkName: "handover_cofirm" */ '@/components/hand_over/part/flow/detail')
+const Confirm = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/confirm/confirm')
+const Success = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/confirm/comfirm_success')
+const Detail = () => import(/* webpackChunkName: "handover" */ '@/components/hand_over/part/flow/detail')
 
+//  简历库
+const Resume = () => import(/* webpackChunkName: "resume" */'@/components/resume/resume')
+const ResumeIndex = () => import(/* webpackChunkName: "resume" */'@/components/resume/index')
+const ResumeCreate = () => import(/* webpackChunkName: "resume" */'@/components/resume/create')
 
 Vue.use(Router)
 
@@ -36,24 +30,25 @@ export default new Router({
       path: '/',
       redirect: 'Login'
     },
+    //  登录页
     {
       path: '/login',
       name: 'Login',
       component: Login
     },
+    //  九宫格
     {
       path: '/Index',
       name: 'index',
       component: Index,
     },
+    /**
+     * 交接工具路由start
+     */
     {
       path: '/confirm/:id',
       name: 'confirm',
       component: Confirm
-    },
-    //  客户确认页
-    {
-      path: '/customer_confirm/:id'
     },
     {
       path: '/success',
@@ -90,5 +85,31 @@ export default new Router({
         },
       ]
     },
+    /**
+     * 交接工具路由end
+     */
+    /**
+     * 简历库初始化
+     */
+    {
+      path: '/resume',
+      component: Resume,
+      children: [
+        {
+          path: 'index',
+          name: 'ResumeIndex',
+          component: ResumeIndex
+        },
+        {
+          path: "create",
+          name: "ResumeCreate",
+          component: ResumeCreate
+        },
+        {
+          path: '/',
+          redirect: "ResumeIndex"
+        }
+      ]
+    }
   ]
 })
