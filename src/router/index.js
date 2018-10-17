@@ -24,12 +24,36 @@ const ResumeIndex = () => import(/* webpackChunkName: "resume" */ '@/components/
 const ResumeCreate = () => import(/* webpackChunkName: "resume" */ '@/components/resume/create')
 const ResumeDetail = () => import(/* webpackChunkName: "resume" */ '@/components/resume/detail')
 
-//  移动市场
-const Market = () => import(/* webpackChunkName: "market" */ '@/components/market/market')
+/**
+ *  移动市场START
+ */
+  //..main组件
+  const Market = () => import(/* webpackChunkName: "market" */ '@/components/market/market')
+  //  首页
+  const MarketIndex = () => import(/* webpackChunkName: "market" */ '@/components/market/Index/index')
+  //  客户管理
+  const CustomerList = () => import(/* webpackChunkName: "market" */ '@/components/market/customer/list')
+  const CustomerDetail = () => import(/* webpackChunkName: "market" */ '@/components/market/customer/detail')
+  const CustomerCreate = () => import(/* webpackChunkName: "market" */ '@/components/market/customer/create')
+  //  企业管理
+  const CompanyList = () => import(/* webpackChunkName: "market" */ '@/components/market/company/list')
+  const CompanyCreate = () => import(/* webpackChunkName: "market" */ '@/components/market/customer/create')
+  //  订单管理
+  const OrderList = () => import(/* webpackChunkName: "market" */ '@/components/market/order/list')
+  //  工单管理
+  const WorkOrderList = () => import(/* webpackChunkName: "market" */ '@/components/market/workOrder/list')
+/**
+ *  移动市场END
+ */
+
 
 Vue.use(Router)
 
 export default new Router({
+  //  只能在history模式下使用
+  // scrollBehavior (to, from, savedPosition) {
+  //   return { x: 0, y: 0 }
+  // },
   routes: [
     {
       path: '/',
@@ -135,15 +159,56 @@ export default new Router({
     /**
      * 移动市场路由start
      */
-    // {
-    //   path: '/market',
-    //   component: Market,
-    //   children: [
-    //     {
-
-    //     }
-    //   ]
-    // }
+    {
+      path: '/market',
+      component: Market,
+      children: [
+        {
+          path: "index",
+          name: "MarketIndex",
+          component: MarketIndex
+        },
+        {
+          path: "customerList",
+          name: "CustomerList",
+          component: CustomerList
+        },
+        {
+          path: "customerDetail/:id",
+          name: "CustomerDetail",
+          component: CustomerDetail
+        },
+        {
+          path: "customerCreate",
+          name: "CustomerCreate",
+          component: CustomerCreate
+        },
+        {
+          path: "companyList/:id",
+          name: "CompanyList",
+          component: CompanyList
+        },
+        {
+          path: "companyCreate",
+          name: "CompanyCreate",
+          component: CompanyCreate
+        },
+        {
+          path: "orderList/:id",
+          name: "OrderList",
+          component: OrderList
+        },
+        {
+          path: "workOrderList/:id",
+          name: "WorkOrderList",
+          component: WorkOrderList
+        },
+        {
+          path: "/",
+          redirect: "index"
+        }
+      ]
+    }
     /**
      * 移动市场路由end
      */

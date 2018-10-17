@@ -42,6 +42,13 @@ export default {
           //  需要使用icon
           img: "/img/handover.png"
         },
+        {
+          access: 3,
+          path: "/market",
+          title: "市场服务",
+          //  需要使用icon
+          img: "/img/handover.png"
+        },
       ]
     }
   },
