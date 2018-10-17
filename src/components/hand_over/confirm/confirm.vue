@@ -1,6 +1,6 @@
 <template>
   <div style="padding-bottom:5vh">
-    <van-nav-bar title="交接确认" left-arrow @click-left="$backTo()" class="navBarStyle"/>
+    <van-nav-bar title="交接确认" left-arrow @click-left="$backTo()" class="navBarStyle" />
     <van-row>
       <van-cell-group>
         <div>

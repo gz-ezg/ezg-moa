@@ -14,8 +14,15 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "async-validator": "^1.9.0",
     "axios": "^0.16.2",
+    "cssnano": "^4.1.4",
     "js-cookie": "^2.2.0",
+    "postcss-aspect-ratio-mini": "0.0.2",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-px-to-viewport": "0.0.3",
+    "postcss-viewport-units": "^0.1.4",
+    "postcss-write-svg": "^3.0.1",
     "qrcodejs2": "0.0.2",
     "vant": "^1.1.4",
     "vue": "^2.5.2",
@@ -41,6 +48,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.28.0",
+    "cssnano-preset-advanced": "^4.0.2",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",

@@ -54,7 +54,7 @@ export default {
                     localStorage.setItem('id', res.data.data.user.id)
                     // _self.getRole(localStorage.getItem("id"))
                     _self.$router.push({
-                       name: 'flow'
+                       name: 'index'
                     })
 
                 }else{
@@ -96,7 +96,7 @@ export default {
                     localStorage.setItem('id', res.data.data.user.id)
                     // _self.getRole(localStorage.getItem("id"))
                     _self.$router.push({
-                       name: 'flow'
+                       name: 'index'
                     })
                 }else{
                     _self.$toast.fail("免登陆失败！请登陆！")

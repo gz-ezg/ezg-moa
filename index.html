@@ -9,12 +9,18 @@
     <!-- 引入组件 -->
     <!-- <script src="https://unpkg.com/vant/lib/vant.min.js"></script> -->
     <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
-    <title>交接工具</title>
+    <title>e帐柜</title>
   </head>
   <body class="bobystyle">
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js"></script>
+  <script>
+    window.onload = function () {
+      window.viewportUnitsBuggyfill.init({ hacks: window.viewportUnitsBuggyfillHacks });
+    }
+  </script>
 </html>
 
 <style>
@@ -30,5 +36,8 @@
   }
   .van-card{
         height: 128px;
+  }
+  :after{
+    content:""!important
   }
 </style>

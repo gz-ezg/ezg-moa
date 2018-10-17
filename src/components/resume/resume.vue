@@ -1,6 +1,5 @@
 <template>
   <div>
-    简历库
     <router-view></router-view>
   </div>
 </template>

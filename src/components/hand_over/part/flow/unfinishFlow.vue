@@ -2,7 +2,8 @@
   <div style="padding-bottom:12vh">
     <van-search placeholder="输入申请人筛选" v-model="searchFile" @search="get_data" />
     <van-row>
-      <van-list v-for="(item, index) in unfinishFilesList" :key="index" >
+      <van-loading v-if="loading" style="top:10vh;left:45vw"></van-loading>
+      <van-list v-for="(item, index) in unfinishFilesList" :key="index" v-if="!loading">
         <div @click="confirm(item)">
           <van-row>
             <van-panel :title="item.applicant_name" :desc="item.application_memo" :status="item.createdate">
@@ -19,7 +20,8 @@ export default {
   data(){
     return{
       unfinishFilesList:[],
-      searchFile: ""
+      searchFile: "",
+      loading: false
     }
   },
   methods:{

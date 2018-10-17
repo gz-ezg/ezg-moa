@@ -22,6 +22,7 @@ const Detail = () => import(/* webpackChunkName: "handover" */ '@/components/han
 const Resume = () => import(/* webpackChunkName: "resume" */ '@/components/resume/resume')
 const ResumeIndex = () => import(/* webpackChunkName: "resume" */ '@/components/resume/index')
 const ResumeCreate = () => import(/* webpackChunkName: "resume" */ '@/components/resume/create')
+const ResumeDetail = () => import(/* webpackChunkName: "resume" */ '@/components/resume/detail')
 
 //  移动市场
 const Market = () => import(/* webpackChunkName: "market" */ '@/components/market/market')
@@ -53,6 +54,10 @@ export default new Router({
       path: '/handOver',
       component: HandOver,
       children: [
+        {
+          path: '/',
+          redirect: { name: 'flow' }
+        },
         {
           path: 'confirm/:id',
           name: 'confirm',
@@ -93,10 +98,7 @@ export default new Router({
             },
           ]
         },
-        {
-          path: '/',
-          redirect: 'flow'
-        },
+
       ]
     },
     /**
@@ -120,8 +122,13 @@ export default new Router({
           component: ResumeCreate
         },
         {
+          path: "detail",
+          name: "ResumeDetail",
+          component: ResumeDetail
+        },
+        {
           path: '/',
-          redirect: "ResumeIndex"
+          redirect: "index"
         }
       ]
     },

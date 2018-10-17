@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-row style="overflow-x: hidden">
-        <van-nav-bar title="交接管理" class="navBarStyle"/>
+        <van-nav-bar title="交接管理" class="navBarStyle" @click-left="$backTo()" left-arrow />
         <!-- @click-left="$backTo()" -->
         <router-view></router-view>
         <van-tabbar v-model="active" fixed>
