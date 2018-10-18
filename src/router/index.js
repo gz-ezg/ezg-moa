@@ -43,7 +43,7 @@ const ResumeDetail = () => import(/* webpackChunkName: "resume" */ '@/components
   //  工单管理
   const WorkOrderList = () => import(/* webpackChunkName: "market" */ '@/components/market/workOrder/list')
 /**
- *  移动市场END
+ *  移动市场END1
  */
 
 
