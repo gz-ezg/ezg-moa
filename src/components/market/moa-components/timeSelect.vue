@@ -34,7 +34,7 @@ export default {
       }
       console.log(year,month,day)
       let temp = year + '-' + month + '-' + day
-      this.$Bus.emit('UPDATE_TIME',temp)
+      this.$bus.emit('UPDATE_TIME',temp)
       this.timeShow = false
     },
     cancel_time(){
@@ -43,7 +43,7 @@ export default {
   },
   created(){
     let _self = this
-    this.$Bus.on('OPEN_TIME',(e)=>{
+    this.$bus.on('OPEN_TIME',(e)=>{
       _self.timeShow = true
     })
   }

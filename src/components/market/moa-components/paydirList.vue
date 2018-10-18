@@ -129,7 +129,7 @@ export default {
   methods:{
     confirm_paydir(e){
       // console.log(e)
-      this.$Bus.emit('UPDATE_PAYDIR',e)
+      this.$bus.emit('UPDATE_PAYDIR',e)
       this.payDirShow = false
     },
     cancel_paydir(){
@@ -138,7 +138,7 @@ export default {
   },
   created(){
     let _self = this
-    this.$Bus.on('OPEN_PAYDIR',(e)=>{
+    this.$bus.on('OPEN_PAYDIR',(e)=>{
       _self.payDirShow = true
     })
   }

@@ -23,7 +23,7 @@ export default {
   methods:{
     confirm_paydir(e){
       // console.log(e)
-      this.$Bus.emit('UPDATE_DEPART',e)
+      this.$bus.emit('UPDATE_DEPART',e)
       this.departShow = false
     },
     cancel_paydir(){
@@ -32,8 +32,8 @@ export default {
   },
   created(){
     let _self = this
-    this.$Bus.off('OPEN_DEPART')
-    this.$Bus.on('OPEN_DEPART',(e)=>{
+    this.$bus.off('OPEN_DEPART')
+    this.$bus.on('OPEN_DEPART',(e)=>{
       // console.log(JSON.parse(e))
       _self.columns = JSON.parse(e)
       _self.departShow = true

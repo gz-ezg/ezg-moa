@@ -3,8 +3,9 @@
     <van-popup v-model="productListShow" style="width:100%;height:100%">
       <van-nav-bar class="navBarStyle" title="产品列表" left-arrow @click-left="productListShow=false"/>
       <van-search placeholder="请输入产品名称" v-model="searchProduct" @search="get_all_product" />
-      <div class="productList" ref="wrapper" >
-        <van-badge-group :active-key="activeKey" class="content" ref="product">
+      <van-loading v-if="loading" style="left:50vw;top:5vh"></van-loading>
+      <div class="productList" ref="wrapper" v-if="!loading">
+        <van-badge-group :active-key="activeKey" class="content" ref="product" >
           <van-badge @click="onClick(item, index)" v-for="(item, index) in productList" :key="index" :title="item.product"/>
         </van-badge-group>
       </div>
@@ -46,7 +47,8 @@ export default {
       sku:"",
       detail:"",
       productId: "",
-      companyId: ""
+      companyId: "",
+      loading: false
     }
   },
   watch:{
@@ -58,8 +60,8 @@ export default {
           function(){
             _self.get_product_price_by_sku()
           }
-        ).catch(function(){
-          console.log("")
+        ).catch(function(err){
+          console.log(err)
         })
         // this.get_product_price_by_sku()
       }else{
@@ -89,6 +91,8 @@ export default {
     //  获取所有的产品
     get_all_product(){
       let _self = this
+      _self.loading = true
+      _self.productType = []
       let url = `api/product/list`
       let config = {
         params: {
@@ -101,6 +105,12 @@ export default {
       function success(res){
         _self.productList = []
         _self.productList = res.data.data.rows
+        if(res.data.data.total){
+          _self.get_product_type(res.data.data.rows[0].id)
+          _self.get_product_sku(res.data.data.rows[0].id)
+          _self.activeKey = 0
+        }
+        _self.loading = false
         _self.productList.push({
           id:"000000",
           product:"暂无"
@@ -176,6 +186,7 @@ export default {
       let _self = this
       return new Promise(function(resolve, reject){
         _self.sku = ""
+        // console.log(_self.producSku)
         let len = _self.producSku[0].linkPropertys.split(",").length
         if(_self.radio.length == len){
           let arr = []
@@ -247,13 +258,13 @@ export default {
 
           function success2(re){
             _self.detail.servicestartdate = re.data.data
-            _self.$Bus.emit("ADD_PRODUCT",_self.detail)
+            _self.$bus.emit("ADD_PRODUCT",_self.detail)
             _self.productListShow = false
           }
 
           _self.$Get(url2, config2, success2)
         }else{
-          _self.$Bus.emit("ADD_PRODUCT",_self.detail)
+          _self.$bus.emit("ADD_PRODUCT",_self.detail)
           _self.productListShow = false
         }
       }
@@ -263,8 +274,8 @@ export default {
   },
   created(){
     let _self = this
-    this.$Bus.off("OPEN_PRODUCT_LIST")
-    this.$Bus.on("OPEN_PRODUCT_LIST",(e)=>{
+    this.$bus.off("OPEN_PRODUCT_LIST")
+    this.$bus.on("OPEN_PRODUCT_LIST",(e)=>{
       _self.productListShow = true
       _self.area = e[0]
       _self.companyId = e[1]

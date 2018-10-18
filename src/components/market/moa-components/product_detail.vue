@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import departList from '../woa-components/departSelect'
+import departList from '../moa-components/departSelect'
 
 export default {
   components:{
@@ -82,15 +82,15 @@ export default {
   },
   created(){
     let _self = this
-    this.$Bus.off("OPEN_PRODUCT_DETAIL")
-    this.$Bus.on("OPEN_PRODUCT_DETAIL",(e)=>{
+    this.$bus.off("OPEN_PRODUCT_DETAIL")
+    this.$bus.on("OPEN_PRODUCT_DETAIL",(e)=>{
       // console.log(e)
       _self.productDetailShow = true
       _self.index = e[0]
       _self.detail = e[1]
     })
-    this.$Bus.off("UPDATE_DEPART")
-    this.$Bus.on("UPDATE_DEPART",(e)=>{
+    this.$bus.off("UPDATE_DEPART")
+    this.$bus.on("UPDATE_DEPART",(e)=>{
       _self.detail.departname = e.text
       _self.detail.departid = e.type
     })
@@ -99,7 +99,7 @@ export default {
   methods:{
     open_depart(){
       let _self = this
-      this.$Bus.emit("OPEN_DEPART",_self.detail.servicedeparts)
+      this.$bus.emit("OPEN_DEPART",_self.detail.servicedeparts)
     },
     delete_item(){
       this.$emit("del",this.index)

@@ -64,14 +64,14 @@ export default {
       console.log(e);
       let _self = this;
       _self.select_company_id = e.companyId;
-      _self.$Bus.emit("UPDATA_COMPANY", e);
+      _self.$bus.emit("UPDATA_COMPANY", e);
       _self.company_open = false;
     }
   },
   created() {
     let _self = this;
-    _self.$Bus.off("OPEN_COMPANY_LIST");
-    _self.$Bus.on("OPEN_COMPANY_LIST", e => {
+    _self.$bus.off("OPEN_COMPANY_LIST");
+    _self.$bus.on("OPEN_COMPANY_LIST", e => {
       // console.log(e, "用户id");
       _self.select_company_id = ""
       _self.searchcompanyname = ""

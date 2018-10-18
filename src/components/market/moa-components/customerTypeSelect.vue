@@ -28,7 +28,7 @@ export default {
       picker.setColumnValues(1, values[0].children);
     },
     confirm_type(e){
-      this.$Bus.emit("UPDATE_TYPE",e)
+      this.$bus.emit("UPDATE_TYPE",e)
       this.typeShow = false
     },
     cancel_type(){
@@ -67,7 +67,7 @@ export default {
   created(){
     let _self = this
     this.get_data()
-    this.$Bus.on('OPEN_TYPE',(e)=>{
+    this.$bus.on('OPEN_TYPE',(e)=>{
       _self.typeShow = true
     })
   },

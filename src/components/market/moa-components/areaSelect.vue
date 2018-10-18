@@ -188,7 +188,7 @@ export default {
   methods:{
     confirm_paydir(e){
       // console.log(e)
-      this.$Bus.emit('UPDATE_AREA',e)
+      this.$bus.emit('UPDATE_AREA',e)
       this.areaShow = false
     },
     cancel_paydir(){
@@ -200,7 +200,7 @@ export default {
   },
   created(){
     let _self = this
-    this.$Bus.on('OPEN_AREA',(e)=>{
+    this.$bus.on('OPEN_AREA',(e)=>{
       _self.areaShow = true
     })
   },
