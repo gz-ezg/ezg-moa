@@ -5,19 +5,21 @@
     <van-row style="margin-top:30px">
       <van-col span="8">
         <div @click="open_create_customer">
-          <center><van-icon name="add-o" style="font-size:40px;padding-bottom:5px"/></center>
+          <center><i class="iconfont icon-kehu" style="font-size:40px"></i></center>
           <center>新增客户</center>
         </div>
       </van-col>
       <van-col span="8">
         <div @click="open_create_company">
-          <center><van-icon name="add-o" style="font-size:40px;padding-bottom:5px"/></center>
+          <center><i class="iconfont icon-gongsi" style="font-size:40px"></i></center>
           <center>新增企业</center>
         </div>
       </van-col>
       <van-col span="8">
-        <center><van-icon name="add-o" style="font-size:40px;padding-bottom:5px"/></center>
-        <center>我的业绩</center>
+        <div @click="open_my_saler">
+          <center><i class="iconfont icon-icon-test" style="font-size:40px"></i></center>
+          <center>我的业绩</center>
+        </div>
       </van-col>
     </van-row>
     <van-row style="width:90%;margin:auto;margin-top:20px">
@@ -231,6 +233,9 @@ export default {
       this.$router.push({
         name: "CustomerList"
       })
+    },
+    open_my_saler(){
+      this.$toast.fail("业绩模块正在抓紧开发中！")
     }
   },
   created(){

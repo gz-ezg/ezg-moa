@@ -17,8 +17,8 @@
       <van-row>
         <van-col span="8">
           <div @click="open_company_info">
-            <center><van-icon name="add-o" style="font-size:40px;padding-bottom:5px"/></center>
-            <center>企业信息</center>
+            <center><i class="iconfont icon-gongsi" style="font-size:40px;margin-bottom:10px"></i></center>
+            <center style="margin-top:5px">企业信息</center>
           </div>
         </van-col>
         <!-- <van-col span="8">
@@ -29,14 +29,14 @@
         </van-col> -->
         <van-col span="8">
           <div @click="open_order_detail">
-            <center><van-icon name="add-o" style="font-size:40px;padding-bottom:5px"/></center>
-            <center>订单详情</center>
+            <center><i class="iconfont icon-dingdan" style="font-size:40px;margin-bottom:10px"></i></center>
+            <center style="margin-top:5px">订单详情</center>
           </div>
         </van-col>
         <van-col span="8">
           <div @click="open_dynamic">
-            <center><van-icon name="add-o" style="font-size:40px;padding-bottom:5px"/></center>
-            <center>服务动态</center>
+            <center><i class="iconfont icon-dongtai1" style="font-size:40px;margin-bottom:10px"></i></center>
+            <center style="margin-top:5px">服务动态</center>
           </div>
         </van-col>
       </van-row>

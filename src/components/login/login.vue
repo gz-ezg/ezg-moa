@@ -52,6 +52,8 @@ export default {
                     Cookies.set('password', _self.password);
                     localStorage.setItem('realname', res.data.data.user.realname)
                     localStorage.setItem('id', res.data.data.user.id)
+                    //  获取权限菜单
+                    _self.get_menu(res.data.data.user.id)
                     // _self.getRole(localStorage.getItem("id"))
                     _self.$router.push({
                        name: 'index'
@@ -94,6 +96,8 @@ export default {
                 if(res.data.msgCode == 40000){
                     localStorage.setItem('realname', res.data.data.user.realname)
                     localStorage.setItem('id', res.data.data.user.id)
+                    //  获取权限菜单
+                    _self.get_menu(res.data.data.user.id)
                     // _self.getRole(localStorage.getItem("id"))
                     _self.$router.push({
                        name: 'index'
@@ -119,6 +123,22 @@ export default {
                 console.log(params[1])
                 this.autologin(params[1])
             }
+        },
+        get_menu(e){
+            let _self = this
+            let url = `api/menu/getInterfaceItemByUserId`
+            let config = {
+                params: {
+                    userId: e
+                }
+            }
+
+            function success(res){
+                Cookies.set('access', (res.data.data.interfaces).join());
+                localStorage.setItem("access_array",JSON.stringify(res.data.data.interfaces))
+            }
+
+            this.$Get(url, config, success)
         }
     },
     created(){
