@@ -5,14 +5,14 @@
         <div slot="left"><van-icon name="close" /></div>
       </van-nav-bar>
       <div style="height:80wh">
-        <van-field v-model="detail.product" label="产品名称" readonly/>
-        <van-field v-model="detail.oaprice" label="产品价格" readonly/>
+        <van-field v-model="detail.product" label="产品名称" disabled/>
+        <van-field v-model="detail.oaprice" label="产品价格" disabled/>
         <van-field v-model="detail.productnumber" label="产品数量" type="number"/>
         <van-field v-model="detail.paynumber" label="销售价格" type="number"/>
         <van-field v-model="detail.givethenumber" label="赠送数量" type="number"/>
         <van-field v-model="detail.servicestartdate" label="服务开始税期" v-if="detail.iscycle=='Y'"/>
         <div @click="open_depart">
-          <van-field v-model="detail.departname" label="服务部门" readonly />
+          <van-field v-model="detail.departname" label="服务部门" disabled />
         </div>
         <van-field v-model="detail.memo" label="备注" type="textarea" placeholder="备注" autosize/>
 

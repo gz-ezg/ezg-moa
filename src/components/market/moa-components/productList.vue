@@ -332,7 +332,7 @@ export default {
   height:40px
 }
 .content_container .van-radio__label{
-  width:75px;
+  width:85px;
 }
 .product_bottom{
   position: fixed;

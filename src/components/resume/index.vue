@@ -7,8 +7,8 @@
       <van-cell-group v-for="(item, index) in allNameList" :key="index" v-if="!loading">
         <van-cell :title="item.name" :value="item.updatedate.slice(0,10)" :label="item.post" is-link center @click="open_detail(item)" >
           <div slot="icon">
-            <van-icon name="success" v-if="item.sex" style="margin-right:10px"/>
-            <van-icon name="close" v-else style="margin-right:10px"/>
+            <i class="iconfont icon-nan" v-if="item.sex" style="margin-right:10px;color:#d81e06"></i>
+            <i class="iconfont icon-nv" v-else style="margin-right:10px;color:#d81e06"></i>
           </div>
         </van-cell>
       </van-cell-group>

@@ -14,7 +14,7 @@
 
         <div style="margin-top:10px;padding-bottom:20px;padding-left:20px">
           <div>{{resumeData.realpath.split("/")[2]}}</div>
-          <img :src="resumeData.realpath" alt="无法预览" style="width: 100px;height:100px"/>
+          <img :src="'/api/assets/' + resumeData.realpath" alt="无法预览" style="width: 100px;height:100px"/>
         </div>
       </van-cell-group>
     </van-row>

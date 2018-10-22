@@ -6,10 +6,10 @@
         <van-cell-group>
           <van-field v-model="username" label="姓名" placeholder="请输入姓名" />
           <van-field v-model="usertel" label="电话" placeholder="请输入电话" @blur="telCheck" />
-          <van-cell title="客户来源" is-link v-model="usersource" @click="openSrc()" />
-          <van-cell title="区域" is-link v-model="userarea" @click="openArea()" />
-          <van-cell title="客户等级" is-link v-model="userlevel" @click="openLevel()" />
-          <van-cell title="客户状态" is-link v-model="usertype" @click="openType()" />
+          <van-cell title="客户来源" is-link v-model="usersource" @click="openSrc()" disabled/>
+          <van-cell title="区域" is-link v-model="userarea" @click="openArea()" disabled/>
+          <van-cell title="客户等级" is-link v-model="userlevel" @click="openLevel()" disabled/>
+          <van-cell title="客户状态" is-link v-model="usertype" @click="openType()" disabled/>
           <client-source></client-source>
           <area-select></area-select>
           <client-level></client-level>

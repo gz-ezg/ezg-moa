@@ -4,15 +4,15 @@
     <van-row style="padding-top:30px">
       <div style="width:80%;margin:auto;">
         <van-cell-group>
-          <van-cell title="归属客户" v-model="belongClient" @click="openClientList"/>
-          <van-cell title="客户电话" v-model="clientTel" @click="openClientList"/>
+          <van-cell title="归属客户" v-model="belongClient" @click="openClientList" disabled/>
+          <van-cell title="客户电话" v-model="clientTel" @click="openClientList" disabled/>
           <van-field v-model="companyname" label="公司名称" placeholder="请输入公司名称" @blur="companyNameCheck" />
-          <van-cell title="公司注册地" is-link v-model="regaddress" @click="openAdress()" />
+          <van-cell title="公司注册地" is-link v-model="regaddress" @click="openAdress()" disabled/>
           <van-field v-model="legalperson" label="法人" placeholder="请输入法人名字" />
-          <van-cell title="重要等级" is-link v-model="levelvalue" @click="openLevel()" />
-          <van-cell title="企业来源" is-link v-model="companysrc" @click="openSrc()" />
+          <van-cell title="重要等级" is-link v-model="levelvalue" @click="openLevel()" disabled/>
+          <van-cell title="企业来源" is-link v-model="companysrc" @click="openSrc()" disabled/>
           <!-- <van-cell title="交易状态" is-link v-model="trading" @click="openTrading()" /> -->
-          <van-cell title="企业纳税类型" is-link v-model="taxtype" @click="openTax()" />
+          <van-cell title="企业纳税类型" is-link v-model="taxtype" @click="openTax()" disabled/>
         </van-cell-group>
       </div>
       <van-tabbar style="margin-top:30px;">
@@ -175,7 +175,7 @@ export default {
         _self.legalperson &&
         _self.levelvalue &&
         _self.companysrc &&
-        _self.trading &&
+        // _self.trading &&
         _self.taxtype &&
         _self.nameflag &&
         _self.belongClient

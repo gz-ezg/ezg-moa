@@ -7,14 +7,14 @@
         <van-field v-model="tel" label="电话" placeholder="请输入电话" required />
         <div style="display:flex;justify-content:center;" class="van-cell">
           <span style="max-width:24vw;flex:1" class="van-cell--required">性别</span>
-          <span style="flex:1">
-            <van-radio-group v-model="sex" style="padding-top:5px">
+          <span style="flex:1;" >
+            <van-radio-group v-model="sex" style="padding-top:5px;line-height:2em">
               <van-row>
-                <van-col span="8" offset="2">
-                  <van-radio name="0" style="font-size:14px;line-height:1.4em">男</van-radio>
+                <van-col span="12">
+                  <van-radio name="0" style="font-size:14px;line-height:1.6em">男</van-radio>
                 </van-col>
-                <van-col span="8">
-                  <van-radio name="1" style="font-size:14px;line-height:1.4em">女</van-radio>
+                <van-col span="12">
+                  <van-radio name="1" style="font-size:14px;line-height:1.6em">女</van-radio>
                 </van-col>
               </van-row>
             </van-radio-group>

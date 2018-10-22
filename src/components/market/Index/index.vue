@@ -25,19 +25,19 @@
     <van-row style="width:90%;margin:auto;margin-top:20px">
       <van-cell-group>
         <div @click="open_search_company">
-          <van-field v-model="company" placeholder="选择客户公司" readonly/>
+          <van-field v-model="company" placeholder="选择客户公司" disabled/>
         </div>
       </van-cell-group>
       <van-cell-group style="margin-top:10px">
         <van-row :gutter="20">
           <van-col span="12">
             <div @click="open_time">
-              <van-field v-model="payTime" placeholder="缴费时间" readonly/>
+              <van-field v-model="payTime" placeholder="缴费时间" disabled/>
             </div>
           </van-col>
           <van-col span="12">
             <div @click="open_paydir">
-              <van-field v-model="payDirName" placeholder="缴费方式" readonly/>
+              <van-field v-model="payDirName" placeholder="缴费方式" disabled/>
             </div>
           </van-col>
         </van-row>
@@ -58,7 +58,7 @@
       </van-cell-group>
       <van-cell-group style="margin-top:10px;margin-bottom:20px">
         <div @click="open_area">
-          <van-field v-model="areaName" placeholder="选择地区" readonly/>
+          <van-field v-model="areaName" placeholder="选择地区" disabled/>
         </div>
       </van-cell-group>
 

@@ -5,10 +5,10 @@
         <div>
           <van-radio-group v-model="connectPlan">
             <van-row style="margin:10px;padding-bottom:20px;padding-top:20px">
-              <van-col span="6" offset="6">
+              <van-col span="12">
                 <van-radio name="f_to_f">当面</van-radio>
               </van-col>
-              <van-col span="6">
+              <van-col span="12">
                 <van-radio name="express">快递</van-radio>
               </van-col>
             </van-row>

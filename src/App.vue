@@ -30,4 +30,7 @@ export default {
   background-color: #CC3300!important;
   border: 1px solid #cc3300
 }
+.van-field__control:disabled{
+  color:black;
+}
 </style>
