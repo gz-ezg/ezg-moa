@@ -134,6 +134,7 @@ export default {
             }
 
             function success(res){
+                // console.log(res.data.data.interfaces)
                 Cookies.set('access', (res.data.data.interfaces).join());
                 localStorage.setItem("access_array",JSON.stringify(res.data.data.interfaces))
             }

@@ -66,6 +66,29 @@ Vue.prototype.$array2map = function (array){
 
 }
 
+Vue.prototype.$GetDataCenter = function (params, finish) {
+  let _self = this
+  let config = {
+    params: {
+      groupCodes: params
+    }
+  }
+  // let url = `api/dataCenter/system/tsType/queryTsTypeByGroupCodes`
+  let url = `api/system/tsType/queryTsTypeByGroupCodes`
+
+  this.$http.get(url, config).then(function (res) {
+    // _self.$backToLogin(res)
+    if (res.data.msgCode == "40000") {
+      finish(res)
+    } else {
+      // _self.$Message.error("请求异常！")
+    }
+  }).catch(function (err) {
+    console.log(err)
+    // _self.$Message.error("网络异常！")
+  })
+}
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -56,7 +56,8 @@ export default {
         params:{
           page: 1,
           pageSize: 1000,
-          file_status: "normal"
+          file_status: "normal",
+          keeper_flag: 1
         }
       }
 

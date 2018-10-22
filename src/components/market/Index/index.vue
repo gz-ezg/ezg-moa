@@ -5,19 +5,19 @@
     <van-row style="margin-top:30px">
       <van-col span="8">
         <div @click="open_create_customer">
-          <center><i class="iconfont icon-kehu" style="font-size:40px"></i></center>
+          <center><i class="iconfont icon-kehu" style="font-size:40px;color:#d81e06"></i></center>
           <center>新增客户</center>
         </div>
       </van-col>
       <van-col span="8">
         <div @click="open_create_company">
-          <center><i class="iconfont icon-gongsi" style="font-size:40px"></i></center>
+          <center><i class="iconfont icon-gongsi" style="font-size:40px;color:#d81e06"></i></center>
           <center>新增企业</center>
         </div>
       </van-col>
       <van-col span="8">
         <div @click="open_my_saler">
-          <center><i class="iconfont icon-icon-test" style="font-size:40px"></i></center>
+          <center><i class="iconfont icon-icon-test" style="font-size:40px;color:#d81e06"></i></center>
           <center>我的业绩</center>
         </div>
       </van-col>

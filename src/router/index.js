@@ -37,7 +37,7 @@ const ResumeDetail = () => import(/* webpackChunkName: "resume" */ '@/components
   const CustomerCreate = () => import(/* webpackChunkName: "market" */ '@/components/market/customer/create')
   //  企业管理
   const CompanyList = () => import(/* webpackChunkName: "market" */ '@/components/market/company/list')
-  const CompanyCreate = () => import(/* webpackChunkName: "market" */ '@/components/market/customer/create')
+  const CompanyCreate = () => import(/* webpackChunkName: "market" */ '@/components/market/company/create')
   //  订单管理
   const OrderList = () => import(/* webpackChunkName: "market" */ '@/components/market/order/list')
   //  工单管理
