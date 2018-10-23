@@ -206,7 +206,7 @@ export default {
           localStorage.setItem("new_customer_name", res.data.data.name)
           localStorage.setItem("new_customer_tel",res.data.data.tel)
           _self.$router.push({
-            name: "createCompany"
+            name: "CompanyCreate"
           })
         }
         function fail(res) {

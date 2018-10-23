@@ -120,7 +120,7 @@ export default {
     if(localStorage.getItem("new_customer_id")){
       _self.belongClient = localStorage.getItem("new_customer_name")
       _self.clientid = localStorage.getItem("new_customer_id")
-      _self.TEL = localStorage.getItem("new_customer_tel")
+      _self.clientTel = localStorage.getItem("new_customer_tel")
       localStorage.setItem("new_customer_name", "")
       localStorage.setItem("new_customer_id", "")
       localStorage.setItem("new_customer_tel","")

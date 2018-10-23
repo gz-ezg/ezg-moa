@@ -11,9 +11,6 @@
         <van-field v-model="detail.cluesourceText"  label="企业来源"/>
         <van-field v-model="detail.followby"  label="跟进销售"/>
         <van-field v-model="detail.CompanyCreateDate"  label="创建时间"/>
-        <van-field v-model="detail.createby"  label="创建人"/>
-        <van-field label="工商信息"/>
-        <van-field label="财务信息"/>
       </van-row>
     </van-popup>
   </div>
@@ -34,6 +31,12 @@ export default {
         CompanyCreateDate:"",
         createby:""
       }
+    }
+  },
+  methods:{
+    get_data(){
+      let _self = this
+      let url = `api/customer/move/marketMoveCompanyList`
     }
   },
   created(){

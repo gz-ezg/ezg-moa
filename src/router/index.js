@@ -67,7 +67,7 @@ export default new Router({
     },
     //  九宫格
     {
-      path: '/Index',
+      path: '/index',
       name: 'index',
       component: Index,
     },

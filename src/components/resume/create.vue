@@ -44,7 +44,7 @@
     </van-row>
     <van-row style="position:fixed;bottom:0;width:100%">
         <center>
-          <van-button size="large" style="width:100%;" type="danger" @click="submit_resume" >保存</van-button>
+          <van-button size="large" style="width:100%;" type="danger" @click="submit_resume" :loading="loading" >保存</van-button>
         </center>
       </van-row>
   </div>
@@ -64,7 +64,8 @@ export default {
       memo: "",
       tel: "",
       file_array: [],
-      show_img: []
+      show_img: [],
+      loading: false
     }
   },
   methods:{
