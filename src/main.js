@@ -66,6 +66,29 @@ Vue.prototype.$array2map = function (array){
 
 }
 
+Vue.prototype.$ButtonCollect = function(name){
+  let _self = this;
+  let url = 'api/system/addGather';
+  let config = {
+      params:{
+          code : name
+      }
+  }
+  this.$http.get(url,config).then(function(res){
+      if(res.data.msgCode == "40000"){
+          if(res.data.msg){
+              // _self.$Message.success(res.data.msg)
+              console.log("采集成功");
+          }
+      }else{
+          // _self.$Message.error(res.data.msg)
+          console.warn(res.data.msg)
+      }
+  }).catch(function(err){
+      console.error(err)
+  })
+}
+
 Vue.prototype.$GetDataCenter = function (params, finish) {
   let _self = this
   let config = {

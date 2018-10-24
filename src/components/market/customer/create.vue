@@ -183,7 +183,7 @@ export default {
           customertype: _self.typecode,
           address: "",
           backup: "",
-          issend: "",
+          issend: "Y",
           fixedphone: "",
           qq: "",
           weixin: "",
@@ -229,6 +229,7 @@ export default {
         _self.customerType = temp.customerTypes;
         _self.levellist = temp.customerrating;
         _self.sf_yn = temp.sf_yn;
+
         // _self.area.reverse();
         // let temp2 = _self.$changeCars(_self.customerType);
 

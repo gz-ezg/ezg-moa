@@ -4,13 +4,13 @@
     <van-row><h2 style="margin-left:5vw">{{detail.NAME}}</h2></van-row>
     <div style="height:80vh;width:97vw;margin:auto">
       <div @click="open_tel">
-        <van-field v-model="detail.product" label="联系方式" disabled/>
+        <van-field v-model="detail.tel" label="联系方式" disabled/>
       </div>
       <van-row style="margin-top:10px"></van-row>
-      <van-field v-model="detail.customerType" label="客户状态" readonly/>
-      <van-field v-model="detail.customersource" label="客户来源" readonly/>
-      <van-field v-model="detail.importlevel" label="客户等级" readonly/>
-      <van-field v-model="detail.CREATEDATE" label="创建时间" readonly/>
+      <!-- <van-field v-model="detail.customerType" label="客户状态" readonly/> -->
+      <van-field v-model="detail.cluesourceText" label="客户来源" readonly/>
+      <van-field v-model="detail.importlevelText" label="客户等级" readonly/>
+      <van-field v-model="detail.createdate" label="创建时间" readonly/>
       <van-row style="margin-top:10px"></van-row>
       <van-field v-model="detail.memo" label="备注" type="textarea" placeholder="备注" autosize/>
       <van-row style="margin-top:30px"></van-row>
@@ -72,15 +72,17 @@ export default {
   methods:{
     get_detail(){
       let _self = this
-      let url = '/api/customer/detail'
+      let url = '/api/customer/move/marketMoveCustomerList'
+      // let url = '/api/customer/detail'
+
       let config = {
         params:{
-          id:_self.customerId
+          CustomerID:_self.customerId
         }
       }
 
       function success(res){
-        _self.detail = res.data.data
+        _self.detail = res.data.data[0]
         console.log(_self.detail)
       }
 

@@ -11,19 +11,20 @@
         <van-cell v-for="(item,index) in data" :key="index" is-link>
           <div @click="open_company_detail(item)">
             <van-row>
-              <van-col span="20" style="font-size:16px;font-weight:600">{{item.companyname}}</van-col>
+              <van-col span="20" style="font-size:16px;font-weight:600">{{item.CompanyName}}</van-col>
               <!-- <van-col span="4" style="text-align:right">{{item.TEL}}</van-col> -->
             </van-row>
             <van-row style="margin-top:10px">
               <!-- <van-col span="24" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.companynames}}</van-col> -->
-              <van-col span="10" >客户：{{item.createby}}</van-col>
-              <van-col span="14" style="padding-right:10px">交易状态：{{item.enterprisestatusText}}</van-col>
+              <van-col span="10" >法人：{{item.legalrepresentative}}</van-col>
+              <!-- <van-col span="14" style="padding-right:10px">交易状态：{{item.enterprisestatusText}}</van-col> -->
+              <van-col span="14" style="text-align:right；font-size:12px">{{item.createdate}}</van-col>
             </van-row>
-            <van-row>
+            <!-- <van-row>
               <van-col span="18" >联系方式：{{item.Tel}}</van-col>
-            </van-row>
+            </van-row> -->
             <van-row>
-              <van-col span="24" style="text-align:right；font-size:12px">{{item.updatedate}}</van-col>
+              <!-- <van-col span="24" style="text-align:right；font-size:12px">{{item.createdate}}</van-col> -->
             </van-row>
           </div>
         </van-cell>
@@ -54,9 +55,11 @@ export default {
   methods:{
     onSearchCompany(){
       let _self = this
-      let url = "api/customer/findCompanysByCustomerId/" + _self.$route.params.id
+      // let url = "api/customer/findCompanysByCustomerId/" + _self.$route.params.id
+      let url = "api/customer/move/marketMoveCompanyList"
       let config = {
         params:{
+          CustomerID: _self.$route.params.id
         }
       }
 

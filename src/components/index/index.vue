@@ -50,6 +50,14 @@
           </center>
         </a>
       </van-col>
+      <van-col span="8" style="height:20vh;" >
+        <router-link to="/login">
+          <center style="padding-top:15%;color:#333333">
+            <i class="iconfont icon-tuichudenglu" style="font-size:35px;color:#d81e06"></i>
+            <p style="color:black;margin-top:10px;font-weight:400;">退出登录</p>
+          </center>
+        </router-link>
+      </van-col>
     </van-row>
   </div>
 </template>
