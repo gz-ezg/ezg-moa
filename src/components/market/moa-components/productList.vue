@@ -80,6 +80,10 @@ export default {
   methods:{
     //  左边栏切换
     onClick(item, index) {
+      if(item.id == "14"){
+        this.$toast.fail("该产品暂时无法操作！")
+        return false;
+      }
       this.radio = []
       this.sku = ""
       // DOM 更新了

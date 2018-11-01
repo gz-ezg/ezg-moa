@@ -51,12 +51,12 @@
         </a>
       </van-col>
       <van-col span="8" style="height:20vh;" >
-        <router-link to="/login">
+        <div @click="login_out">
           <center style="padding-top:15%;color:#333333">
             <i class="iconfont icon-tuichudenglu" style="font-size:35px;color:#d81e06"></i>
             <p style="color:black;margin-top:10px;font-weight:400;">退出登录</p>
           </center>
-        </router-link>
+        </div>
       </van-col>
     </van-row>
   </div>
@@ -100,6 +100,20 @@ export default {
     //     name: e
     //   })
     // }
+    login_out(){
+      let _self = this
+      let url = `api/user/logOut`
+
+      let config = {}
+
+      function success(res){
+        _self.$router.push({
+          name: "Login"
+        })
+      }
+
+      this.$Get(url, config, success)
+    },
     get_menu(){
       let _self = this
       // console.log(Cookies.get('access').split(","))
@@ -123,7 +137,7 @@ export default {
   },
   created(){
     let _self = this
-    _self.get_menu()
+    // _self.get_menu()
   }
 }
 </script>
