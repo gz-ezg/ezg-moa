@@ -142,6 +142,7 @@ export default {
       for(let i = 0; i<this.productList.length;i++){
         price += parseInt(this.productList[i].paynumber)
       }
+      this.hadPayMoney = price
       return price
     }
   },
@@ -173,6 +174,7 @@ export default {
     submit(){
       let _self = this
       let url = `/api/order/create`
+      _self.$ButtonCollect("mobile_create_order")
       _self.submit_loading = true
       let config = {
           GDSreport: _self.GDSreport,

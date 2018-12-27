@@ -21,10 +21,10 @@
           <van-radio-group v-model="formValidate.status">
             <van-row style="margin:10px;padding-bottom:10px">
               <van-col span="10">
-                <van-radio name="Y">接收</van-radio>
+                <center><van-radio name="Y">接收</van-radio></center>
               </van-col>
               <van-col span="10">
-                <van-radio name="N">拒收</van-radio>
+                <center><van-radio name="N">拒收</van-radio></center>
               </van-col>
             </van-row>
           </van-radio-group>

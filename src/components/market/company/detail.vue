@@ -1,16 +1,16 @@
 <template>
   <div>
     <van-popup v-model="companyShow" style="width:100%;height:105%">
-      <van-nav-bar class="navBarStyle" :title="detail.companyname" @click-left="companyShow=false">
+      <van-nav-bar class="navBarStyle" :title="detail.CompanyName" @click-left="companyShow=false">
         <div slot="left"><van-icon name="close" /></div>
       </van-nav-bar>
       <van-row>
-        <van-field v-model="detail.enterprisestatusText"  label="交易状态"/>
+        <!-- <van-field v-model="detail.enterprisestatusText"  label="交易状态"/> -->
         <van-field v-model="detail.importlevelText"  label="重要等级"/>
         <van-field v-model="detail.legalrepresentative"  label="法人"/>
-        <van-field v-model="detail.cluesourceText"  label="企业来源"/>
+        <van-field v-model="detail.cluesources"  label="企业来源"/>
         <van-field v-model="detail.followby"  label="跟进销售"/>
-        <van-field v-model="detail.CompanyCreateDate"  label="创建时间"/>
+        <van-field v-model="detail.createdate"  label="创建时间"/>
       </van-row>
     </van-popup>
   </div>

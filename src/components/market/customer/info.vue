@@ -4,8 +4,8 @@
       <div slot="left"><van-icon name="close" /></div>
     </van-nav-bar>
     <div>
-      <van-field v-model="detail.TEL" label="电话" :input-align="right"/>
-      <van-field v-model="detail.fixedPhone" label="固话" :input-align="right"/>
+      <van-field v-model="detail.tel" label="电话" :input-align="right"/>
+      <van-field v-model="detail.fixedphone" label="固话" :input-align="right"/>
       <van-field v-model="detail.qq" label="QQ" :input-align="right"/>
       <van-field v-model="detail.weixin" label="微信" :input-align="right"/>
       <van-field v-model="detail.email" label="邮箱" :input-align="right"/>
