@@ -45,6 +45,7 @@ const ResumeDetail = () => import(/* webpackChunkName: "resume" */ '@/components
 /**
  *  移动市场END1
  */
+  const Test = () => import(/* webpackChunkName: "test" */ '@/components/test/index.vue')
 
 
 Vue.use(Router)
@@ -56,8 +57,13 @@ export default new Router({
   // },
   routes: [
     {
+      path: '/test',
+      name: 'test',
+      component: Test
+    },
+    {
       path: '/',
-      redirect: 'Login'
+      redirect: 'test'
     },
     //  登录页
     {

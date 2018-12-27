@@ -5,7 +5,7 @@
   "author": "linyr",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.0.226",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 127.0.0.1",
     "dev2": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.0.220",
     "dev-home": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.1.226",
     "start": "npm run dev",
@@ -26,7 +26,7 @@
     "postcss-viewport-units": "^0.1.4",
     "postcss-write-svg": "^3.0.1",
     "qrcodejs2": "0.0.2",
-    "vant": "^1.1.4",
+    "vant": "^1.4.8",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "weixin-js-sdk": "^1.3.2",
