@@ -46,6 +46,8 @@ const ResumeDetail = () => import(/* webpackChunkName: "resume" */ '@/components
  *  移动市场END1
  */
   const Test = () => import(/* webpackChunkName: "test" */ '@/components/test/index.vue')
+  const Comfirm = () => import(/* webpackChunkName: "test" */ '@/components/test/comfirm.vue')
+  const fileCompany = () => import(/* webpackChunkName: "test" */ '@/components/test/fileCompany.vue')
 
 
 Vue.use(Router)
@@ -60,6 +62,16 @@ export default new Router({
       path: '/test',
       name: 'test',
       component: Test
+    },
+    {
+      path: "/comfirm",
+      name: 'comfirm',
+      component: Comfirm
+    },
+    {
+      path: "/file_company",
+      name: "file_company",
+      component: fileCompany
     },
     {
       path: '/',

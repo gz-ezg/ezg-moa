@@ -13,13 +13,13 @@
             <van-field v-model="item.customerFileName" slot="title" class="title-field-item"></van-field>
             <van-stepper v-model="item.fileNum" :min="0" :max="item.plural" :defaultValue="0" integer/>
           </van-cell>
-          <!-- <van-cell title="单元格" value="内容" label="描述信息" /> -->
         </van-cell-group>
       </div>
     </van-row>
     <submit-bar
       button-text="提交资料"
       @submit="submit"
+      :price="selectFileTotal"
     >
     </submit-bar>
   </div>
@@ -69,6 +69,9 @@ export default {
     },
     submit(){
       this.$store.dispatch("file/update_file", this.fileList)
+      this.$router.push({
+          name: "comfirm"
+      })
       setTimeout(()=>{
         console.log(this.$store.getters["file/get_valid_file"])
       },500)
