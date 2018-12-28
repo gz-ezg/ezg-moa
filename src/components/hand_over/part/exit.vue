@@ -98,7 +98,8 @@ export default {
         let config = {
           connectPlan: _self.connectPlan,
           trackingNumber: _self.trackingNumber,
-          customerFileJson: JSON.stringify(temp)
+          customerFileJson: JSON.stringify(temp),
+          outType: "customer"
         }
 
         function success(res){

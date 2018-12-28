@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-popup v-model="fileListShow" style="width:100vw;height:100vh">
+    <van-popup v-model="fileListShow" style="width:100vw;height:100vh;overflow-y:scroll;">
       <van-nav-bar class="navBarStyle" title="文件列表" left-arrow @click-left="fileListShow=false">
         <div slot="left"><van-icon name="close" /></div>
       </van-nav-bar>
@@ -55,9 +55,10 @@ export default {
       let config = {
         params:{
           page: 1,
-          pageSize: 1000,
-          file_status: "normal",
-          keeper_flag: 1
+          pageSize: 30,
+          file_status: "'normal'",
+          keeper_flag: 1,
+          companyname: _self.searchFile
         }
       }
 

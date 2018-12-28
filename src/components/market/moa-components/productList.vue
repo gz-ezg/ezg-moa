@@ -10,13 +10,38 @@
         </van-badge-group>
       </div>
       <div class="detailContent">
-        <van-row v-for="(item,index) in productType" :key="index" class="content_container">
-          <van-row class="content_name">{{item.name}}</van-row>
-          <van-radio-group v-model="radio[index]">
-            <van-col span="12" v-for="(type, index) in item.children" :key="index" class="content_radio">
-              <van-radio :name="type.pvId" :key="index">{{type.propertyValue}}</van-radio>
+        <!-- 针对地址变更的暂时性处理 -->
+        <van-row class="content_container" v-if="selectProduct.id == 100 && changeArea">
+          <!-- <Row v-for="(item, index) in queryProperty" :key="index" class="type-select"> -->
+          <p>{{productType[0].name}}</p>
+          <van-radio-group v-model="radio[0]" type="button" size="large" @on-change="radio[1]='';productPrice=0" >
+            <van-col span="12" v-for="(type, index2) in productType[0].children" :key="index2" class="content_radio">
+              <van-radio  :name="type.pvId">{{type.propertyValue}}</van-radio>
             </van-col>
           </van-radio-group>
+          <p v-if="radio[0]==310">{{productType[2].name}}</p>
+            <van-radio-group v-model="radio[1]" type="button" size="large" v-if="radio[0]==310" >
+              <van-col span="12" v-for="(type, index) in productType[2].children" :key="index" class="content_radio">
+                <van-radio :name="type.pvId">{{type.propertyValue}}</van-radio>
+              </van-col>
+            </van-radio-group>
+          <p v-if="radio[0]!=310">{{productType[1].name}}</p>
+            <van-radio-group v-model="radio[1]" type="button" size="large" v-if="radio[0]!=310">
+              <van-col span="12" v-for="(type, index) in productType[1].children" :key="index" class="content_radio">
+                <van-radio :name="type.pvId" >{{type.propertyValue}}</van-radio>
+              </van-col>
+            </van-radio-group>
+            <!-- </Row> -->
+        </van-row>
+        <van-row v-else>
+          <van-row v-for="(item,index) in productType" :key="index" class="content_container">
+            <van-row class="content_name">{{item.name}}</van-row>
+            <van-radio-group v-model="radio[index]">
+              <van-col span="12" v-for="(type, index) in item.children" :key="index" class="content_radio">
+                <van-radio :name="type.pvId" :key="index">{{type.propertyValue}}</van-radio>
+              </van-col>
+            </van-radio-group>
+          </van-row>
         </van-row>
       </div>
         <van-row class="product_bottom">
@@ -48,7 +73,9 @@ export default {
       detail:"",
       productId: "",
       companyId: "",
-      loading: false
+      loading: false,
+      selectProduct: "",
+      changeArea: false
     }
   },
   watch:{
@@ -84,6 +111,12 @@ export default {
         this.$toast.fail("该产品暂时无法操作！")
         return false;
       }
+      this.selectProduct = item
+      if(item.id == 100){
+        this.changeArea = true
+      }else{
+        this.changeArea = false
+      }
       this.radio = []
       this.sku = ""
       // DOM 更新了
@@ -114,6 +147,9 @@ export default {
           _self.get_product_sku(res.data.data.rows[0].id)
           _self.activeKey = 0
         }
+        if(res.data.data.rows[0].id == 100){
+          _self.selectProduct = res.data.data.rows[0]
+        }
         _self.loading = false
         _self.productList.push({
           id:"000000",
@@ -140,6 +176,24 @@ export default {
         _self.productType = res.data.data
         // for(let i = 0; i<_self.productType.length; i++){
         //   _self.radio.push(_self.productType[i].children[0].pvId  )
+        if(e == 100){
+          let temp = []
+          for(let i = 0; i< _self.productType.length; i++){
+            if(_self.productType[i].propertyId == 95){
+              temp[0] = _self.productType[i]
+            }
+            if(_self.productType[i].propertyId == 23){
+              temp[1] = _self.productType[i]
+            }
+            if(_self.productType[i].propertyId == 16){
+              temp[2] = _self.productType[i]
+            }
+            }
+            _self.productType = temp
+            _self.changeArea = true
+          }else{
+            _self.changeArea = false
+        }
         // }
       }
 

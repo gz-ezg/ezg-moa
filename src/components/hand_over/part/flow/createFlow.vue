@@ -3,7 +3,7 @@
     <van-row>
       <van-cell-group>
         <div @click="open_user_select">
-          <van-field v-model="receiverName" placeholder="请选择接收人" required/>
+          <van-field v-model="receiverName" placeholder="请选择接收人" required disabled/>
         </div>
         <div>
           <van-field v-model="applicationMemo" placeholder="备注" type="textarea"/>
