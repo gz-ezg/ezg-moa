@@ -4,10 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vant from 'vant';
-import 'vant/lib/vant-css/index.css';
+import 'vant/lib/index.css';
 import { Lazyload } from 'vant';
 import axios from 'axios'
 import VueBus from './common/vue-bus'
+import store from './store'
 import { Toast } from 'vant';
 
 Vue.use(VueBus)
@@ -118,6 +119,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
