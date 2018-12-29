@@ -2,10 +2,12 @@ const file = {
   namespaced: true,
   state: {
     fileList: [],
-    companyName: "广州则为信息科技有限公司",
+    companyName: "",
     companyId: "",
     saveDepart: "",
+    saveDepartId: "",
     storageName: "",
+    storageNameId: "",
     storageCode: ""
   },
   mutations: {
@@ -17,7 +19,15 @@ const file = {
       state.companyId = company.id
     },
     update_storageCode(state, storageCode){
-      state.storageCode = storageCode
+      state.storageCode = storageCode.name
+    },
+    update_saveDepart(state, depart){
+      state.saveDepart = depart.text
+      state.saveDepartId = depart.id
+    },
+    update_storageName(state, storage){
+      state.storageName = storage.text
+      state.storageNameId = storage.id
     }
   },
   actions: {
@@ -29,6 +39,12 @@ const file = {
     },
     update_storageCode(context, storageCode){
       context.commit("update_storageCode", storageCode)
+    },
+    update_saveDepart(context, depart){
+      context.commit("update_saveDepart", depart)
+    },
+    update_storageName(context, storage){
+      context.commit("update_storageName", storage)
     }
   },
   getters: {

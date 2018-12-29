@@ -1,5 +1,6 @@
 <template>
     <div>
+      <van-nav-bar title="选择企业" class="navBarStyle" @click-left="$backTo()" left-arrow/>
         <form action="/">
             <van-search placeholder="请输入公司名称搜索" v-model="searchcompanyname" @click="search"/>
         </form>
