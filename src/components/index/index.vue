@@ -88,6 +88,12 @@ export default {
           title: "市场服务",
           class: "icon-ic_market"
         },
+        {
+          access: 6017,
+          path: "/test",
+          title: "测试",
+          class: "icon-jiaojieqingkuang"
+        },
       ],
 
       access: [],

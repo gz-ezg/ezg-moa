@@ -63,7 +63,7 @@ export default new Router({
     },
     {
       path: '/',
-      redirect: 'test'
+      redirect: 'Login'
     },
     //  登录页
     {
