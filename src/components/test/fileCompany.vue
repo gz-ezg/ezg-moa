@@ -1,6 +1,6 @@
 <template>
     <div>
-      <van-nav-bar title="选择企业" class="navBarStyle" @click-left="$backTo()" left-arrow/>
+      <van-nav-bar title="选择企业" class="navBarStyle" @click-left="back" left-arrow/>
         <form action="/">
             <van-search placeholder="请输入公司名称搜索" v-model="searchcompanyname" @click="search"/>
         </form>
@@ -47,9 +47,14 @@ export default {
         choose(e){
             console.log(e)
             this.$store.dispatch("file/update_company", e)
-            this.$router.push({
+            this.$router.replace({
                 name: "comfirm"
             })
+        },
+        back(){
+          this.$router.replace({
+            name: "comfirm"
+          })
         }
     },
     created(){

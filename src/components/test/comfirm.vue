@@ -7,7 +7,7 @@
               <van-cell title="企业名称" :value="companyName" @click="to_page('file_company')"/>
               <van-cell title="存放部门" :value="$store.state.file.saveDepart" @click="departOpen=true"/>
               <van-cell title="存放地点" :value="$store.state.file.storageName" @click="localOpen=true"/>
-              <van-field label="存放位置" :value="storageCode"  input-align="right" @input="update_storage_code" />
+              <van-field label="存放位置" v-model="storageCode"  input-align="right" />
           </van-cell-group>
           <van-cell-group style="margin-top:10px">
             <center style="padding:10px;">文件列表</center>
@@ -47,8 +47,13 @@ export default {
         storageNameId(){
             return this.$store.state.file.storageNameId
         },
-        storageCode(){
-            return this.$store.state.file.storageCode
+        storageCode:{
+            get () {
+              return this.$store.state.file.storageCode
+            },
+            set (value) {
+              this.$store.commit('file/update_storageCode', value)
+            }
         },
         disabled(){
           if(!this.$store.getters['file/get_valid_file'].length){
@@ -60,15 +65,29 @@ export default {
     },
     methods: {
         to_page(e){
-            this.$router.push({
+            this.$router.replace({
                 name: e
             })
         },
         update_storage_code(e){
+            console.log(e)
             this.$store.dispatch("file/update_storageCode", e)
         },
         submit(){
+          if(!this.$store.state.file.companyId){
+            this.$toast.fail("请选择公司名称！")
+            return false;
+          }
+          if(!this.$store.state.file.saveDepartId){
+            this.$toast.fail("请选择部门名称！")
+            return false;
+          }
+          if(!this.$store.state.file.storageNameId){
+            this.$toast.fail("请选择存放地点！")
+            return false;
+          }
             let _self = this
+            let url = `api/customer/file/create`
             let result = this.$store.getters['file/get_valid_file'].map((item)=>{
                 return {
                     customerFileName: item.customerFileName,
@@ -78,8 +97,36 @@ export default {
                     storageCode: _self.storageCode
                 }
             })
+            if(!result.length){
+              this.$toast.fail("请选择存放的文件！")
+            }
+            this.loading = true
+            let config = {
+              dataJson: JSON.stringify(result),
+              companyId: _self.$store.state.file.companyId
+            }
 
-            console.log(result)
+            function success(res){
+              setTimeout(()=>{
+                _self.$toast("即将跳转回首页！")
+              }, 1000)
+              _self.loading = false
+              setTimeout(()=>{
+                _self.$router.replace({
+                  name: "test"
+                })
+
+                _self.$store.dispatch("file/clean_file_detail")
+              },1000)
+              
+            }
+
+            function fail(err){
+              _self.loading = false
+            }
+
+            this.$Post(url, config, success, fail)
+
         }
     }
 }

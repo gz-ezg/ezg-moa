@@ -1,12 +1,12 @@
 <template>
   <div>
-    <van-nav-bar title="交接管理" class="navBarStyle fix-top" @click-left="$backTo()" left-arrow/>
+    <van-nav-bar title="资料入库" class="navBarStyle fix-top" @click-left="$backTo()" left-arrow/>
     <van-row style="padding-bottom:13.333vw;padding-top:13.333vw;">
       <div style="width:90px;float:left;overflow-y:scroll" class="left-fix">
       <!-- <div class="wrapper"> -->
         <van-cell-group>
-          <div style="padding:10px;border-bottom:1px solid #ebedf0" v-for="(item, index) in leftSide" :key="index" @click="toIndex(item.index)">
-            {{item.title}}
+          <div style="padding:10px;border-bottom:1px solid #ebedf0;" v-for="(item, index) in typeList" :key="index" @click="toIndex(index)">
+            {{item.typename}}
           </div>
         </van-cell-group>
       </div>
@@ -44,32 +44,7 @@ export default {
   data(){
     return {
       fileList: [],
-      leftSide: [
-        {
-          title: "常用",
-          index: 0
-        },
-        {
-          title: "工商",
-          index: 8
-        },
-        {
-          title: "税务",
-          index: 15
-        },
-        {
-          title: "银行",
-          index: 25
-        },
-        {
-          title: "个人",
-          index: 38
-        },
-        {
-          title: "其他",
-          index: 40
-        }
-      ],
+      typeList: []
     }
   },
   computed:{
@@ -82,45 +57,72 @@ export default {
   },
   methods: {
     toIndex(e){
-      let total = document.querySelector("#item-"+e).offsetTop
+      let total = document.querySelector("#item-"+this.typeList[e].len).offsetTop
       let distance = document.documentElement.scrollTop
+      console.log("total:" + total)
+      console.log("window.pageYOffset:" + window.pageYOffset)
+      document.body.scrollTop = total
+      // Firefox
       document.documentElement.scrollTop = total
-      // console.log(total)
-      // console.log(distance)
-      // document.documentElement.scrollTop = document.documentElement.scrollTop + 50
-      // let timer
-      // if(distance < total ){
-      //   timer = setTimeout(() => {
-      //     this.toIndex(e)
-      //   }, 40);
-      // }else{
-      //   clearTimeout(timer)
-      // }
+      // Safari
+      window.pageYOffset = total
     },
     get_file_type(){
       let _self = this
-      let url = "api/customer/file/type/list"
+      let url = "api/customer/file/type/moduleList"
 
       let config = {}
 
       function success(res){
-        _self.fileList = res.data.data.map((item)=>{
-          return {
-            customerFileName: item.file_type_name,
-            customerFileTypeId: item.id,
-            saveDepartId: "",
-            storage: "",
-            storageCode: "",
-            fileNum: 0,
-            plural: item.plural == 'Y'?99:1
+        console.log(res.data.data)
+        let data  = res.data.data
+        let tempTypeList = {}
+        for(let i = 0; i<data.length; i++){
+          if(tempTypeList[data[i].file_ptype_name]){
+            tempTypeList[data[i].file_ptype_name].children.push({
+              customerFileName: data[i].file_type_name,
+              customerFileTypeId: data[i].id,
+              saveDepartId: "",
+              storage: "",
+              storageCode: "",
+              fileNum: 0,
+              plural: data[i].plural== 'Y'?99:1
+            })
+          }else{
+            tempTypeList[data[i].file_ptype_name] = {
+              typename: data[i].file_ptype_name,
+              children: []
+            }
+            tempTypeList[data[i].file_ptype_name].children.push({
+              customerFileName: data[i].file_type_name,
+              customerFileTypeId: data[i].id,
+              saveDepartId: "",
+              storage: "",
+              storageCode: "",
+              fileNum: 0,
+              plural: data[i].plural == 'Y'?99:1
+            })
           }
-        })
+        }
+
+        for(let x in tempTypeList){
+          _self.typeList.push({
+            typename: x,
+            index: tempTypeList[x].children.length
+          })
+          _self.fileList.push(...tempTypeList[x].children)
+        }
+        for(let i = 0; i<_self.typeList.length;i++){
+          _self.typeList[i].len = i==0? 0: _self.typeList[i-1].len+ _self.typeList[i-1].index
+        }
+        // console.log(_self.typeList)
       }
 
       this.$Get(url, config, success)
     },
     submit(){
       this.$store.dispatch("file/update_file", this.fileList)
+      this.$store.dispatch("file/update_leftMenu", this.typeList)
       this.$router.push({
           name: "comfirm"
       })
@@ -142,49 +144,46 @@ export default {
     }
   },
   created(){
-    // console.log(this.$store.state)
     if(!this.$store.state.file.fileList.length){
       this.get_file_type()
     }else{
       this.fileList = this.$store.state.file.fileList
+      this.typeList = this.$store.state.file.leftMenu
     }
   },
   mounted(){
-    // this.$nextTick(() => {
-    //   this.scroll = new Bscroll(this.$refs.wrapper, {})
-    // })
   }
 }
 </script>
 
 <style>
 .file .van-collapse-item__content{
-    padding: 0;
+    padding: 0!important;
 }
 .title-field{
-  padding: 0;
-  padding: 3px;
+  padding: 0!important;
+  padding: 3px!important;
 }
 .title-field-item{
-  padding: 5px;
+  padding: 5px!important;
 }
 .fix-top{
-  position: fixed;
+  position: fixed!important;
   top:0;
   width: 100%;
 }
 .van-stepper__input[disabled]{
-  color: #7d7e80;
-  background-color: #fff;
+  color: #000000!important;
+  background-color: #fff!important;
 }
 .left-fix{
-  position: fixed;
+  position: fixed!important;
   /* 两栏布局 */
   /* top: 8vh;
   bottom: 8vh; */
 }
 .van-submit-bar__text span{
-  display: inline;
+  display: inline!important;
 }
 /* .van-submit-bar__text>span{
   display: none;

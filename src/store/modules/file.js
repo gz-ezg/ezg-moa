@@ -8,7 +8,8 @@ const file = {
     saveDepartId: "",
     storageName: "",
     storageNameId: "",
-    storageCode: ""
+    storageCode: "",
+    leftMenu: []
   },
   mutations: {
     update_file(state, fileList){
@@ -19,7 +20,7 @@ const file = {
       state.companyId = company.id
     },
     update_storageCode(state, storageCode){
-      state.storageCode = storageCode.name
+      state.storageCode = storageCode
     },
     update_saveDepart(state, depart){
       state.saveDepart = depart.text
@@ -28,6 +29,15 @@ const file = {
     update_storageName(state, storage){
       state.storageName = storage.text
       state.storageNameId = storage.id
+    },
+    update_leftMenu(state, leftMenu){
+      state.leftMenu = leftMenu
+    },
+    clean_file_detail(state){
+      state.leftMenu = []
+      state.fileList = []
+      state.companyId = ""
+      state.companyName = ""
     }
   },
   actions: {
@@ -45,6 +55,12 @@ const file = {
     },
     update_storageName(context, storage){
       context.commit("update_storageName", storage)
+    },
+    update_leftMenu(context, leftMenu){
+      context.commit("update_leftMenu", leftMenu)
+    },
+    clean_file_detail(context){
+      context.commit("clean_file_detail")
     }
   },
   getters: {

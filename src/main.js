@@ -51,6 +51,7 @@ Vue.prototype.$Post = function (url, config, success, fail) {
 }
 
 Vue.prototype.$backTo = function(){
+  console.log(this.$router)
   this.$router.go(-1)
 }
 
