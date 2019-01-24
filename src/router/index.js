@@ -24,6 +24,13 @@ const ResumeIndex = () => import(/* webpackChunkName: "resume" */ '@/components/
 const ResumeCreate = () => import(/* webpackChunkName: "resume" */ '@/components/resume/create')
 const ResumeDetail = () => import(/* webpackChunkName: "resume" */ '@/components/resume/detail')
 
+//  异常工单审批
+// const Approve = () => import(/* webpackChunkName: "resume" */ '@/components/approve/approve')
+const ApproveIndex = () => import(/* webpackChunkName: "resume" */ '@/components/approve/index')
+const ApproveList = () => import(/* webpackChunkName: "resume" */ '@/components/approve/list/index')
+const ApproveDetail = () => import(/* webpackChunkName: "resume" */ '@/components/approve/detail/index')
+
+
 /**
  *  移动市场START
  */
@@ -48,7 +55,6 @@ const ResumeDetail = () => import(/* webpackChunkName: "resume" */ '@/components
   const Test = () => import(/* webpackChunkName: "test" */ '@/components/test/index.vue')
   const Comfirm = () => import(/* webpackChunkName: "test" */ '@/components/test/comfirm.vue')
   const fileCompany = () => import(/* webpackChunkName: "test" */ '@/components/test/fileCompany.vue')
-
 
 Vue.use(Router)
 
@@ -171,6 +177,32 @@ export default new Router({
         {
           path: '/',
           redirect: "index"
+        }
+      ]
+    },
+    //  异常工单
+    {
+      path: '/approve',
+      component: ApproveIndex,
+      children: [
+        // {
+        //   path: 'index',
+        //   name: 'ApproveIndex',
+        //   component: ApproveIndex
+        // },
+        {
+          path: "list",
+          name: "ApproveList",
+          component: ApproveList
+        },
+        {
+          path: "detail/:id",
+          name: "ApproveDetail",
+          component: ApproveDetail
+        },
+        {
+          path: '/',
+          redirect: "list"
         }
       ]
     },

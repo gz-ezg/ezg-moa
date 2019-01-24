@@ -94,6 +94,12 @@ export default {
           title: "资料入库(体验版)",
           class: "icon-jiaojieqingkuang"
         },
+        {
+          access: 6017,
+          path: "/approve",
+          title: "工单审批",
+          class: "icon-jiaojieqingkuang"
+        },
       ],
 
       access: [],
