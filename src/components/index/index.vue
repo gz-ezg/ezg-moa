@@ -91,7 +91,7 @@ export default {
         {
           access: 6017,
           path: "/test",
-          title: "资料入库(体验版)",
+          title: "资料入库",
           class: "icon-jiaojieqingkuang"
         },
         {
