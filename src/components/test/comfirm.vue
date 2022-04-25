@@ -94,6 +94,7 @@ export default {
                     customerFileTypeId: item.customerFileTypeId,
                     saveDepartId: _self.saveDepartId,
                     storage: _self.storageNameId,
+                    fileNum: item.fileNum,
                     storageCode: _self.storageCode
                 }
             })

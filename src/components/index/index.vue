@@ -18,14 +18,14 @@
           </center>
         </router-link>
       </van-col>
-      <van-col span="8" style="height:20vh;" >
+      <!-- <van-col span="8" style="height:20vh;" >
         <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7666e5cbbd22b505&redirect_uri=http%3a%2f%2fcloud.zgcfo.com%2fapi%2flegwork%2fapiWechatCompanyWqAuthLogin&response_type=code&scope=SCOPE&agentid=1000022&state=STATE#wechat_redirect">
           <center style="padding-top:15%;color:#333333">
             <i class="iconfont icon-639" style="font-size:35px;color:#d81e06"></i>
             <p style="color:black;margin-top:10px;font-weight:400;">外勤打卡</p>
           </center>
         </a>
-      </van-col>
+      </van-col> -->
       <van-col span="8" style="height:20vh;" >
         <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7666e5cbbd22b505&redirect_uri=http://follow.zgcfo.com/api/customer/apiWechatAddFollowRecordCallback&response_type=code&scope=SCOPE&agentid=1000030&state=STATE#wechat_redirect">
           <center style="padding-top:15%;color:#333333">
@@ -76,30 +76,30 @@ export default {
           title: "交接工具",
           class: "icon-jiaojieqingkuang"
         },
-        {
-          access: 6018,
-          path: "/resume",
-          title: "简历库",
-          class: "icon-jianli"
-        },
-        {
-          access: 9999,
-          path: "/market",
-          title: "市场服务",
-          class: "icon-ic_market"
-        },
+        // {
+        //   access: 6018,
+        //   path: "/resume",
+        //   title: "简历库",
+        //   class: "icon-jianli"
+        // },
+        // {
+        //   access: 9999,
+        //   path: "/market",
+        //   title: "市场服务",
+        //   class: "icon-ic_market"
+        // },
         {
           access: 6017,
           path: "/test",
           title: "资料入库(体验版)",
           class: "icon-jiaojieqingkuang"
         },
-        {
-          access: 6017,
-          path: "/approve",
-          title: "工单审批",
-          class: "icon-jiaojieqingkuang"
-        },
+        // {
+        //   access: 6017,
+        //   path: "/approve",
+        //   title: "工单审批",
+        //   class: "icon-jiaojieqingkuang"
+        // },
       ],
 
       access: [],
